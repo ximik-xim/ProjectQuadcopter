@@ -2,11 +2,11 @@
 
 namespace Assets.Scripts
 {
-    class CarFactory : IFactory<Car>
+    public struct CarFactory : IFactory<Car, Transform, Vector3, Car>
     {
-        public Car GetCreated()
+        public Car Create(Car prefab, Transform parent, Vector3 position)
         {
-            throw new System.NotImplementedException();
+            return Object.Instantiate(prefab, position, Quaternion.identity, parent);
         }
     }
 }
