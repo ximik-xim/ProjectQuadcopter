@@ -8,16 +8,16 @@ namespace Assets.Scripts
     {
         private List<T> _elements;
         private Transform _container;
-        private T _elementPrefab;
 
-        public void Fill(T element, Transform container, int amount)
+        public void AddElement(T element)
         {
-            _elementPrefab = element;
-            _container = container;
+            _container = element.transform.parent;
             _elements = new List<T>();
 
-            for (int i = 0; i < amount; i++)
-                CreateElement();
+            element.gameObject.SetActive(false);
+            element.transform.SetParent(_container);
+            element.transform.localPosition = Vector3.zero;
+            _elements.Add(element);
         }
 
         public void Return(T element)
@@ -32,7 +32,7 @@ namespace Assets.Scripts
             if (HasAvailable(out T element))
                 return element;
 
-            throw new Exception("No available elements!");
+            return null;
         }
 
         public bool HasAvailable(out T availableElement)
@@ -48,16 +48,7 @@ namespace Assets.Scripts
                 }
             }
 
-            availableElement = CreateElement(true);
-            return false;
-        }
-
-        private T CreateElement(bool isActive = false)
-        {
-            T instance = UnityEngine.Object.Instantiate(_elementPrefab, _container);
-            instance.gameObject.SetActive(isActive);
-            _elements.Add(instance);
-            return instance;
+            throw new Exception("No available elements!");
         }
     }
 }
