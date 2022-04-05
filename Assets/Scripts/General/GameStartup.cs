@@ -1,16 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStartup : MonoBehaviour
+namespace Assets.Scripts
 {
-
-
-    private void Awake()
+    public class GameStartup : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private Transform _city;
+        [SerializeField] private Way _way;
 
-    private void Start()
-    {
-        
+        [Header("Prefabs")]
+        [SerializeField] private Quadcopter _quadcopterPrefab;
+        [SerializeField] private PlayerCamera _playerCameraPrefab;
+        [SerializeField] private AggressiveBird _aggressiveBurdPrefab;
+        [SerializeField] private Car _carPrefab;
+        [SerializeField] private Clothesline _clotheslinePrefab;
+        [SerializeField] private Net _netPrefab;
+        [SerializeField] private List<Chunk> _chunkPrefabs;
+
+
+        private void Start()
+        {
+            _way.Init();
+            _way.SpawnChunks(_chunkPrefabs, 10);
+            _way.SpawnPlayerCamera(_playerCameraPrefab);
+        }
     }
 }
