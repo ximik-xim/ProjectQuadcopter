@@ -7,6 +7,7 @@ namespace Assets.Scripts
     {
         private List<Chunk> _prefabs;
         private Container _container;
+        private int _prefabIndex = -1;
 
         public ChunkFactory(List<Chunk> prefabs, Container container)
         {
@@ -14,6 +15,14 @@ namespace Assets.Scripts
             _container = container;
         }
 
-        public Chunk GetCreated() => Object.Instantiate(_prefabs[Random.Range(0, _prefabs.Count)], _container.transform);
+        public Chunk GetCreated()
+        {
+            _prefabIndex++;
+
+            if (_prefabIndex == _prefabs.Count)
+                _prefabIndex = 0;
+
+            return Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
+        }
     }
 }
