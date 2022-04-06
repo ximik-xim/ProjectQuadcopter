@@ -38,8 +38,10 @@ namespace Assets.Scripts
 
         private bool HasAvailable(out T availableElement)
         {
-            foreach (T element in _elements)
+            for (int i = 0; i < _elements.Count; i++)
             {
+                T element = _elements[Random.Range(0, _elements.Count)];
+
                 if (element.gameObject.activeSelf == false)
                 {
                     element.transform.localPosition = Vector3.zero;
