@@ -4,25 +4,25 @@ namespace Assets.Scripts
 {
     public class WayMatrix
     {
-        private const int MatrixWidth = 3;
-        private const int MatrixHeight = 3;
         private Vector2[,] _matrix;
 
+        public int Width { get; private set; } = 3;
+        public int Height { get; private set; } = 3;
         public float Horizon { get; private set; }
         public float Spacing { get; private set; }
 
         public WayMatrix(float horizon, float spacing)
         {
-            _matrix = new Vector2[MatrixWidth, MatrixHeight];
+            _matrix = new Vector2[Width, Height];
             Horizon = horizon;
             Spacing = spacing;
 
             float xCurrentIndex = -Spacing;
             float yCurrentIndex = Spacing;
 
-            for (int x = 0; x < MatrixWidth; x++)
+            for (int x = 0; x < Width; x++)
             {
-                for (int y = 0; y < MatrixHeight; y++)
+                for (int y = 0; y < Height; y++)
                 {
                     _matrix[x, y] = new Vector2(xCurrentIndex, yCurrentIndex);
                     yCurrentIndex -= Spacing;
@@ -58,6 +58,8 @@ namespace Assets.Scripts
 
             return Vector2.zero;
         }
+
+        public Vector2 GetPosition(int x, int y) => _matrix[x, y];
     }
 
     public enum MatrixPosition
