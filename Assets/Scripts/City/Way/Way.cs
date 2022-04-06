@@ -6,6 +6,8 @@ namespace Assets.Scripts
 {
     public class Way : MonoBehaviour
     {
+        [SerializeField] [Range(0.1f, 10)] private float _startSpeed;
+
         private Container _chunksContainer;
         private Container _entitieContainer;
         private Coroutine _loopRoutine;
@@ -23,6 +25,7 @@ namespace Assets.Scripts
         public void Init()
         {
             Matrix = new WayMatrix(50, 5);
+            Speed = _startSpeed;
             _chunksContainer = GetCreatedContainer("ChunksContainer");
             _entitieContainer = GetCreatedContainer("EntityContainer");
         }
@@ -47,6 +50,19 @@ namespace Assets.Scripts
             return _quadcopterFactory.GetCreated();
         }
 
+        public void StartLoop() => _loopRoutine = StartCoroutine(LoopRoutine());
+
+        private IEnumerator LoopRoutine()
+        {
+            float spawnTemp = 1.5f;
+
+            while (true)
+            {
+                _chunksPool.Get();
+                yield return new WaitForSeconds(spawnTemp * Speed);
+            }
+        }
+
         private Container GetCreatedContainer(string title)
         {
             GameObject container = new GameObject(title);
@@ -62,5 +78,7 @@ namespace Assets.Scripts
             container.AddComponent(typeof(Container));
             return container.GetComponent<Container>();
         }
+
+        private void OnDisable() => StopCoroutine(_loopRoutine);
     }
 }
