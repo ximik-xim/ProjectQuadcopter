@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1389865029075994988}
   - component: {fileID: 6543055561499015604}
+  - component: {fileID: 2395285780866130735}
   m_Layer: 0
   m_Name: Clothesline
   m_TagString: Untagged
@@ -156,3 +157,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae82a1c3becaff47a952f2c5226b673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2395285780866130735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276177137691015889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c0b9fedb4cd243a916aa059970bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selfSpeed: 0
