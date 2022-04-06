@@ -6,7 +6,6 @@ namespace Assets.Scripts
 {
     public class Way : MonoBehaviour
     {
-        private WayMatrix _matrix;
         private Container _chunksContainer;
         private Container _entitieContainer;
         private Coroutine _loopRoutine;
@@ -14,21 +13,38 @@ namespace Assets.Scripts
 
         private ChunkFactory _chunkFactory;
         private PlayerCameraFactory _playerCameraFactory;
+        private QuadcopterFactory _quadcopterFactory;
 
         private Pool<Chunk> _chunksPool;
-        private PlayerCamera _playerCamera;
-        private Quadcopter _quadcopter;
+
+        public static WayMatrix Matrix { get; private set; }
+        public static float Speed { get; private set; }
 
         public void Init()
         {
-            _matrix = new WayMatrix(30, 2);
+            Matrix = new WayMatrix(50, 5);
             _chunksContainer = GetCreatedContainer("ChunksContainer");
             _entitieContainer = GetCreatedContainer("EntityContainer");
         }
 
-        private void OnEnable()
-        {
+        public void GetPosition(MatrixPosition matrixPosition) => Matrix.GetPosition(matrixPosition);
 
+        public void SpawnChunks(List<Chunk> chunkPrefabs, int amount)
+        {
+            _chunkFactory = new ChunkFactory(chunkPrefabs, _chunksContainer);
+            _chunksPool.Init(_chunkFactory, _chunksContainer, amount);
+        }
+
+        public PlayerCamera GetSpawnedPlayerCamera(PlayerCamera playerCameraPrefab)
+        {
+            _playerCameraFactory = new PlayerCameraFactory(playerCameraPrefab, _entitieContainer, Matrix.GetPosition(MatrixPosition.Center));
+            return _playerCameraFactory.GetCreated();
+        }
+
+        public Quadcopter GetSpawnedQuadcopter(Quadcopter prefab)
+        {
+            _quadcopterFactory = new QuadcopterFactory(prefab, _entitieContainer, Matrix.GetPosition(MatrixPosition.Center));
+            return _quadcopterFactory.GetCreated();
         }
 
         private Container GetCreatedContainer(string title)
@@ -38,34 +54,13 @@ namespace Assets.Scripts
 
             container.transform.position = new Vector3
             (
-                _matrix.GetPosition(MatrixPosition.Center).x,
-                _matrix.GetPosition(MatrixPosition.Center).y,
-                _matrix.Horizon
+                Matrix.GetPosition(MatrixPosition.Center).x,
+                Matrix.GetPosition(MatrixPosition.Center).y,
+                Matrix.Horizon
             );
 
             container.AddComponent(typeof(Container));
             return container.GetComponent<Container>();
-        }
-
-        public void SpawnChunks(List<Chunk> chunkPrefabs, int amount)
-        {
-            _chunkFactory = new ChunkFactory(chunkPrefabs, _chunksContainer);
-
-            for (int i = 0; i < chunkPrefabs.Count; i++)
-            {
-                _chunksPool.Init(_chunkFactory, _chunksContainer, amount);
-            }
-        }
-
-        public void SpawnPlayerCamera(PlayerCamera playerCameraPrefab)
-        {
-            _playerCameraFactory = new PlayerCameraFactory(playerCameraPrefab, _entitieContainer, _matrix.GetPosition(MatrixPosition.Center));
-            _playerCamera = _playerCameraFactory.GetCreated();
-        }
-
-        private void OnDisable()
-        {
-
         }
     }
 }
