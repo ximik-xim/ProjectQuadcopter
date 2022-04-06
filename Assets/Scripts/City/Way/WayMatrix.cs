@@ -11,11 +11,11 @@ namespace Assets.Scripts
         public float Horizon { get; private set; }
         public float Spacing { get; private set; }
 
-        public WayMatrix(float horizon, float spacing)
+        public WayMatrix()
         {
             _matrix = new Vector2[Width, Height];
-            Horizon = horizon;
-            Spacing = spacing;
+            Horizon = 50;
+            Spacing = 5;
 
             float xCurrentIndex = -Spacing;
             float yCurrentIndex = Spacing;
