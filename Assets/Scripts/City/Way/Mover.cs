@@ -30,7 +30,7 @@ namespace Assets.Scripts
         private void Move()
         {
             MotionTime += Time.fixedDeltaTime;
-            transform.position += Vector3.back * (Way.Speed + _selfSpeed);
+            transform.position += Vector3.back * (SpeedProvider.Speed + _selfSpeed);
         }
 
         private void OnDisable() => UpdateService.OnFixedUpdate -= Move;
