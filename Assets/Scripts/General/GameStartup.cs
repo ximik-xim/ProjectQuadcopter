@@ -17,12 +17,16 @@ namespace Assets.Scripts
         [SerializeField] private Net _netPrefab;
         [SerializeField] private List<Chunk> _chunkPrefabs;
 
+        private PlayerCamera _playerCamera;
+        private Quadcopter _quadcopter;
+
 
         private void Start()
         {
             _way.Init();
             _way.SpawnChunks(_chunkPrefabs, 10);
-            _way.SpawnPlayerCamera(_playerCameraPrefab);
+            _playerCamera = _way.GetSpawnedPlayerCamera(_playerCameraPrefab);
+            _quadcopter = _way.GetSpawnedQuadcopter(_quadcopterPrefab);
         }
     }
 }
