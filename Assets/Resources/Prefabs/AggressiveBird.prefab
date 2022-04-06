@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7564642995679936221}
   - component: {fileID: 1637066925607362624}
+  - component: {fileID: 6297965943566712352}
   m_Layer: 0
   m_Name: AggressiveBird
   m_TagString: Untagged
@@ -125,6 +126,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc802150700ace4582cd7868fd4a6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6297965943566712352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816714996948124956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c0b9fedb4cd243a916aa059970bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selfSpeed: 5
 --- !u!1 &4307822453704392946
 GameObject:
   m_ObjectHideFlags: 0
