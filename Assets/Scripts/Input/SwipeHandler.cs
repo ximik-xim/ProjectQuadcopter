@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class SwipeHandler : MonoBehaviour
     {
-        public event Action<SwipeDirection> OnSwipe;
+        public static event Action<SwipeDirection> OnSwipe;
 
         [SerializeField] [Range(0, 1)] private float _directionThreshold;
         [SerializeField] [Range(0, 300)] private int _deadZone;
@@ -35,21 +35,13 @@ namespace Assets.Scripts
 
         private SwipeDirection DeterminateDirection(Vector2 swipeDirection)
         {
-            if (Vector2.Dot((Vector2.up + Vector2.left).normalized, swipeDirection) > _directionThreshold) return SwipeDirection.UpperLeft;
-
-            if (Vector2.Dot(Vector2.up, swipeDirection) > _directionThreshold) return SwipeDirection.Up;
-
-            if (Vector2.Dot((Vector2.up + Vector2.right).normalized, swipeDirection) > _directionThreshold) return SwipeDirection.UpperRight;
-
             if (Vector2.Dot(Vector2.left, swipeDirection) > _directionThreshold) return SwipeDirection.Left;
 
             if (Vector2.Dot(Vector2.right, swipeDirection) > _directionThreshold) return SwipeDirection.Right;
 
-            if (Vector2.Dot((Vector2.down + Vector2.left).normalized, swipeDirection) > _directionThreshold) return SwipeDirection.LowwerLeft;
+            if (Vector2.Dot(Vector2.up, swipeDirection) > _directionThreshold) return SwipeDirection.Up;
 
             if (Vector2.Dot(Vector2.down, swipeDirection) > _directionThreshold) return SwipeDirection.Down;
-
-            if (Vector2.Dot((Vector2.down + Vector2.right).normalized, swipeDirection) > _directionThreshold) return SwipeDirection.LowwerRight;
 
             return SwipeDirection.Zero;
         }
@@ -59,10 +51,10 @@ namespace Assets.Scripts
 
     public enum SwipeDirection
     {
-        UpperLeft,      Up,     UpperRight,
+                 Up,
 
-        Left,         Zero,          Right,
+        Left,   Zero,  Right,
 
-        LowwerLeft,   Down,     LowwerRight
+                Down
     }
 }
