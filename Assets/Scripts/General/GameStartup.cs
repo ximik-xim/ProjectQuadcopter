@@ -27,6 +27,7 @@ namespace Assets.Scripts
             _way.SpawnChunks(_chunkPrefabs, 10);
             _playerCamera = _way.GetSpawnedPlayerCamera(_playerCameraPrefab);
             _quadcopter = _way.GetSpawnedQuadcopter(_quadcopterPrefab);
+            _way.StartLoop();
         }
     }
 }

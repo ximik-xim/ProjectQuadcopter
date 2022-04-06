@@ -29,8 +29,6 @@ namespace Assets.Scripts
             return Create(true);
         }
 
-        public void Return(T element) => PoolUp(element, false);
-
         private void PoolUp(T element, bool isActive)
         {
             element.transform.SetParent(_container.transform);
@@ -44,7 +42,7 @@ namespace Assets.Scripts
             {
                 if (element.gameObject.activeSelf == false)
                 {
-                    element.transform.SetParent(null);
+                    element.transform.localPosition = Vector3.zero;
                     element.gameObject.SetActive(true);
                     availableElement = element;
                     return true;
