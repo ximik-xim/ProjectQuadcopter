@@ -33,6 +33,7 @@ namespace Assets.Scripts
             _entitieContainer = GetCreatedContainer("EntityContainer");
             _speedProvider.SetStartSpeed(_startSpeed);
             _wayGenerator.InitWay(_chunkPrefabs, _chunksContainer, _chunkPrefabs.Count); // Õ¿–”ÿ≈Õ¿ »Õ ¿œ—”Àﬂ÷»ﬂ CHUNK PREFABS !!!
+            _wayGenerator.SpawnStartableChunks(5);
             GetCreatedActor(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
             GetCreatedActor(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
         }
@@ -41,14 +42,7 @@ namespace Assets.Scripts
         {
             GameObject container = new GameObject(title);
             container.transform.SetParent(_city);
-
-            container.transform.position = new Vector3
-            (
-                _wayMatrix.GetPosition(MatrixPosition.Center).x,
-                _wayMatrix.GetPosition(MatrixPosition.Center).y,
-                _wayMatrix.Horizon
-            );
-
+            container.transform.position = _wayMatrix.Horizon;
             container.AddComponent(typeof(Container));
             return container.GetComponent<Container>();
         }
