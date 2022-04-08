@@ -8,16 +8,16 @@ namespace Assets.Scripts
 
         public int Width { get; private set; } = 3;
         public int Height { get; private set; } = 3;
-        public float Horizon { get; private set; }
-        public float Edge { get; private set; }
+        public Vector3 Horizon { get; private set; }
+        public Vector3 Edge { get; private set; }
         public float Spacing { get; private set; }
 
         public WayMatrix()
         {
             _matrix = new Vector2[Width, Height];
-            Horizon = 50;
-            Edge = -50;
-            Spacing = 5;
+            Horizon = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, 50);
+            Edge = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, -50);
+            Spacing = 4;
 
             float xCurrentIndex = -Spacing;
             float yCurrentIndex = Spacing;
