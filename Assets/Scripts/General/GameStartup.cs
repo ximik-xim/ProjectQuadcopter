@@ -16,6 +16,7 @@ namespace Assets.Scripts
         [SerializeField] private Car _carPrefab;
         [SerializeField] private Clothesline _clotheslinePrefab;
         [SerializeField] private Net _netPrefab;
+        [Space(30)]
         [SerializeField] private List<Chunk> _chunkPrefabs;
 
         [Header("Configurations")]
@@ -26,18 +27,14 @@ namespace Assets.Scripts
         private Container _chunksContainer;
         private Container _entitieContainer;
 
-        private PlayerCameraFactory _playerCameraFactory;
-        private QuadcopterFactory _quadcopterFactory;
-
         private void Start()
         {
             _chunksContainer = GetCreatedContainer("ChunksContainer");
             _entitieContainer = GetCreatedContainer("EntityContainer");
             _speedProvider.SetStartSpeed(_startSpeed);
-            _wayGenerator.GenerateChunks(_chunkPrefabs, _chunksContainer, _chunkPrefabs.Count); // Õ¿–”ÿ≈Õ¿ »Õ ¿œ—”Àﬂ÷»ﬂ CHUNK PREFABS !!!
-            GetSpawnedPlayerCamera(_playerCameraPrefab);
-            GetSpawnedQuadcopter(_quadcopterPrefab);
-            _wayGenerator.StartLoop();
+            _wayGenerator.InitWay(_chunkPrefabs, _chunksContainer, _chunkPrefabs.Count); // Õ¿–”ÿ≈Õ¿ »Õ ¿œ—”Àﬂ÷»ﬂ CHUNK PREFABS !!!
+            GetCreatedActor(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
+            GetCreatedActor(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
         }
 
         private Container GetCreatedContainer(string title)
@@ -56,16 +53,6 @@ namespace Assets.Scripts
             return container.GetComponent<Container>();
         }
 
-        private PlayerCamera GetSpawnedPlayerCamera(PlayerCamera playerCameraPrefab)
-        {
-            _playerCameraFactory = new PlayerCameraFactory(playerCameraPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center));
-            return _playerCameraFactory.GetCreated();
-        }
-
-        private Quadcopter GetSpawnedQuadcopter(Quadcopter prefab)
-        {
-            _quadcopterFactory = new QuadcopterFactory(prefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center));
-            return _quadcopterFactory.GetCreated();
-        }
+        private T GetCreatedActor<T>(IFactory<T> factory) where T : Actor => factory.GetCreated();
     }
 }
