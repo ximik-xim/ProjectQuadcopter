@@ -14,6 +14,12 @@ namespace Assets.Scripts
         {
             _chunkFactory = new ChunkFactory(prefabs, container, SpawnChunk);
             _chunksPool.Init(_chunkFactory, container, amount);
+            SpawnStartChunksToHorizon();
+        }
+
+        private void SpawnStartChunksToHorizon()
+        {
+
         }
 
         public void SpawnChunk() => _chunksPool.Get();
