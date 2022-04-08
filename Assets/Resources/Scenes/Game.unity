@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 20
-  m_LinearFogEnd: 50
+  m_LinearFogEnd: 30
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -482,12 +482,13 @@ MonoBehaviour:
   _netPrefab: {fileID: 5917012183079924583, guid: b1fe09e495ac6734dbd206a74bb44d76,
     type: 3}
   _chunkPrefabs:
-  - {fileID: 2219872157849419823, guid: aff579752f4e08946abda6d516a0003c, type: 3}
-  - {fileID: 2219872157849419823, guid: 24530423436766c44998b7b1e92685b6, type: 3}
-  - {fileID: 2219872157849419823, guid: 47a3463be04bd614b97e08507f92b458, type: 3}
-  - {fileID: 2219872157849419823, guid: 1e012ce06c059e34ebeccbaeac4642a5, type: 3}
-  - {fileID: 2219872157849419823, guid: 9477c22645b03804bae004760cfa5b9e, type: 3}
-  - {fileID: 2219872157849419823, guid: 437eee529fb28fc4c922dd55fff85129, type: 3}
+  - {fileID: 9191757689737021188, guid: 7e09c5cc818acd042962a12b0e4e8abc, type: 3}
+  - {fileID: 6328417353234506659, guid: 1adb428b4a2889147966786232580af1, type: 3}
+  - {fileID: -840939647595525456, guid: 318db1cef752eb047a78c1a5a1af7f31, type: 3}
+  - {fileID: 6406978364637998829, guid: a673f34a113bc0d48911658cddd58050, type: 3}
+  - {fileID: -1471220750757077440, guid: d209540c019e14b40ac489e8239f83e5, type: 3}
+  - {fileID: 7946600438839257562, guid: d32b812a8f915fd4a84c41e46755c1a0, type: 3}
+  - {fileID: -1925305964513043887, guid: 01fe2093536242a42986ac4722490f21, type: 3}
   _startSpeed: 0.5
 --- !u!1 &1414658730
 GameObject:
