@@ -16,7 +16,7 @@ namespace Assets.Scripts
         {
             transform.position += Vector3.back * (SpeedProvider.Speed + _selfSpeed);
 
-            if (transform.position.z <= _wayMatrix.Edge)
+            if (transform.position.z <= _wayMatrix.Edge.z)
             {
                 gameObject.SetActive(false);
                 OnStop?.Invoke();
