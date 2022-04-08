@@ -10,11 +10,12 @@ namespace Assets.Scripts
         private int _prefabIndex = -1;
         private SpawnMethod _spawnMethod;
 
-        public ChunkFactory(List<Chunk> prefabs, Container container, SpawnMethod spawnMethod)
+        public ChunkFactory(List<Chunk> prefabs, Container container, SpawnMethod spawnMethod, out float chunkSize)
         {
             _prefabs = prefabs;
             _container = container;
             _spawnMethod = spawnMethod;
+            chunkSize = _prefabs[0].Size;
         }
 
         public Chunk GetCreated()
