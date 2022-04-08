@@ -2,12 +2,12 @@
 
 namespace Assets.Scripts
 {
-    abstract class EntityFactory<E> : IFactory<E> where E : Entity
+    abstract class ActorFactory<E> : IFactory<E> where E : Actor
     {
         protected E _prefab;
         protected Container _container;
 
-        public EntityFactory(E prefab, Container container)
+        public ActorFactory(E prefab, Container container)
         {
             _prefab = prefab;
             _container = container;

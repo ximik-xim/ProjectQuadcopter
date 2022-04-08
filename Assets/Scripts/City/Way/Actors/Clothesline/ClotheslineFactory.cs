@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class ClotheslineFactory : EntityFactory<Clothesline>
+    class ClotheslineFactory : ActorFactory<Clothesline>
     {
         public ClotheslineFactory(Clothesline prefab, Container container) : base(prefab, container) { }
 

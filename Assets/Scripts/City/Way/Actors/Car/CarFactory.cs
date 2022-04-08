@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class CarFactory : EntityFactory<Car>
+    class CarFactory : ActorFactory<Car>
     {
         public CarFactory(Car prefab, Container container) : base(prefab, container) { }
 

@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Assets.Scripts
 {
-    public class Chunk : MonoBehaviour
-    {
-
-    }
+    public class Chunk : Movable { }
 }

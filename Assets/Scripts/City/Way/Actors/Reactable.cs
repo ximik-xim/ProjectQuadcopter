@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    public abstract class Reactable : Entity
+    public abstract class Reactable : Movable
     {
         protected virtual void FlyAway()
         {

@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class NetFactory : EntityFactory<Net>
+    class NetFactory : ActorFactory<Net>
     {
         public NetFactory(Net prefab, Container container) : base(prefab, container) { }
 
