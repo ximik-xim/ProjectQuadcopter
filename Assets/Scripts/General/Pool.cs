@@ -21,10 +21,13 @@ namespace Assets.Scripts
             }
         }
 
-        public T Get()
+        public T Get(Vector3 spawnPosition)
         {
             if (HasAvailable(out T availableElement))
+            {
+                availableElement.transform.position = spawnPosition;
                 return availableElement;
+            }
 
             return Create(true);
         }
@@ -44,7 +47,6 @@ namespace Assets.Scripts
 
                 if (element.gameObject.activeSelf == false)
                 {
-                    element.transform.localPosition = Vector3.zero;
                     element.gameObject.SetActive(true);
                     availableElement = element;
                     return true;
