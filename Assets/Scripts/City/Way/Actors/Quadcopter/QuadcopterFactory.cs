@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class QuadcopterFactory : EntityFactory<Quadcopter>
+    class QuadcopterFactory : ActorFactory<Quadcopter>
     {
         private Vector3 _spawnPosition;
 
