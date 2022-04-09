@@ -33,7 +33,7 @@ namespace Assets.Scripts
             _entitieContainer = GetCreatedContainer("EntityContainer");
             _speedProvider.SetStartSpeed(_startSpeed);
             _wayGenerator.InitWay(_chunkPrefabs, _chunksContainer, _chunkPrefabs.Count); // Õ¿–”ÿ≈Õ¿ »Õ ¿œ—”Àﬂ÷»ﬂ CHUNK PREFABS !!!
-            _wayGenerator.SpawnStartableChunks(5);
+            _wayGenerator.SpawnStartableChunks(4);
             GetCreatedActor(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
             GetCreatedActor(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
         }
