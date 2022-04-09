@@ -15,8 +15,8 @@ namespace Assets.Scripts
         public WayMatrix()
         {
             _matrix = new Vector2[Width, Height];
-            Horizon = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, 50);
-            Edge = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, -50);
+            Horizon = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, 48);
+            Edge = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, -48);
             Spacing = 4;
 
             float xCurrentIndex = -Spacing;
