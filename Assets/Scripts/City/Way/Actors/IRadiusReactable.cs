@@ -2,6 +2,6 @@
 {
     public interface IRadiusReactable
     {
-        public void OnRadiusEnter();
+        public void OnRadiusEnter(Quadcopter target);
     }
 }

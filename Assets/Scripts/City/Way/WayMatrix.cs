@@ -2,22 +2,23 @@
 
 namespace Assets.Scripts
 {
-    public class WayMatrix
+    [CreateAssetMenu(menuName = "Way Matrix", fileName = "New Way Matrix")]
+    public class WayMatrix : ScriptableObject
     {
+        [SerializeField] [Range(2, 10)] private int _width;
+        [SerializeField] [Range(2, 10)] private int _height;
+        [SerializeField] [Range(1, 10)] private float _spacing;
+
         private Vector2[,] _matrix;
 
-        public int Width { get; private set; } = 3;
-        public int Height { get; private set; } = 3;
-        public Vector3 Horizon { get; private set; }
-        public Vector3 Edge { get; private set; }
-        public float Spacing { get; private set; }
+        public int Width => _width;
+        public int Height => _height;
+        public float Spacing => _spacing;
+        public Vector3 Center => _matrix[_width / 2, _height / 2];
 
-        public WayMatrix()
+        public void OnValidate()
         {
             _matrix = new Vector2[Width, Height];
-            Horizon = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, 48);
-            Edge = new Vector3(GetPosition(MatrixPosition.Center).x, GetPosition(MatrixPosition.Center).y, -48);
-            Spacing = 4;
 
             float xCurrentIndex = -Spacing;
             float yCurrentIndex = Spacing;
@@ -35,41 +36,6 @@ namespace Assets.Scripts
             }
         }
 
-        public Vector2 GetPosition(MatrixPosition position)
-        {
-            switch (position)
-            {
-                case MatrixPosition.UpperLeft: return _matrix[0, 0];
-
-                case MatrixPosition.Up: return _matrix[1, 0];
-
-                case MatrixPosition.UpperRight: return _matrix[2, 0];
-
-                case MatrixPosition.Left: return _matrix[0, 1];
-
-                case MatrixPosition.Center: return _matrix[1, 1];
-
-                case MatrixPosition.Right: return _matrix[2, 1];
-
-                case MatrixPosition.LowwerLeft: return _matrix[0, 2];
-
-                case MatrixPosition.Down: return _matrix[1, 2];
-
-                case MatrixPosition.LowwerRight: return _matrix[2, 2];
-            }
-
-            return Vector2.zero;
-        }
-
         public Vector2 GetPosition(int x, int y) => _matrix[x, y];
-    }
-
-    public enum MatrixPosition
-    {
-        UpperLeft,      Up,     UpperRight,
-
-        Left,         Center,        Right,
-
-        LowwerLeft,    Down,    LowwerRight
     }
 }

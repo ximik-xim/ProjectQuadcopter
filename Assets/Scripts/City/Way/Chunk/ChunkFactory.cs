@@ -8,13 +8,11 @@ namespace Assets.Scripts
         private List<Chunk> _prefabs;
         private Container _container;
         private int _prefabIndex = -1;
-        private SpawnMethod _spawnMethod;
 
-        public ChunkFactory(List<Chunk> prefabs, Container container, SpawnMethod spawnMethod, out float chunkSize)
+        public ChunkFactory(List<Chunk> prefabs, Container container, out float chunkSize)
         {
             _prefabs = prefabs;
             _container = container;
-            _spawnMethod = spawnMethod;
             chunkSize = _prefabs[0].Size;
         }
 
@@ -26,7 +24,6 @@ namespace Assets.Scripts
                 _prefabIndex = 0;
 
             Chunk chunk = Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
-            chunk.OnStop += _spawnMethod;
             return chunk;
         }
     }

@@ -1,32 +1,24 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts
 {
-    public abstract class Reactable : Movable
+    public abstract class Reactable : Actor
     {
-        protected virtual void FlyAway()
+        protected Dictionary<Type, IReaction> _reactions = new Dictionary<Type, IReaction>();
+
+        public void AddReaction(IReaction reaction) => _reactions.Add(reaction.GetType(), reaction);
+
+        protected IReaction TryGetReaction<T>() where T : IReaction
         {
+            if (_reactions.ContainsKey(typeof(T)))
+            {
+                var type = typeof(T);
+                return _reactions[type];
+            }
 
-        }
-
-        protected virtual void KnockOff()
-        {
-
-        }
-
-        protected virtual void Catch()
-        {
-
-        }
-
-        protected virtual void TakeHalfHP()
-        {
-
-        }
-
-        protected virtual void LeanOutTheWindow()
-        {
-
+            new Exception("No Such Reaction");
+            return null;
         }
     }
 }

@@ -5,57 +5,26 @@ namespace Assets.Scripts
 {
     public class SwipeController : MonoBehaviour
     {
-        [SerializeField] [Range(0.5f, 5)] private float _stepSize;
         [SerializeField] [Range(0, 1)] private float _motionDuration;
-
-        private int _currentPositionX;
-        private int _currentPositionY;
-        private WayMatrix _wayMatrix = new WayMatrix();
-
-        public int CurrentPositionX
-        {
-            get => _currentPositionX;
-
-            private set => _currentPositionX = Mathf.Clamp(value, 0, _wayMatrix.Width - 1);
-        }
-
-        public int CurrentPositionY
-        {
-            get => _currentPositionY;
-
-            private set => _currentPositionY = Mathf.Clamp(value, 0, _wayMatrix.Height - 1);
-        }
+        private WayMatrix _wayMatrix;
+        private int _currentPositionX = 1;
+        private int _currentPositionY = 1;
 
         private void OnEnable() => SwipeHandler.OnSwipe += Move;
 
-        public void Move(SwipeDirection swipeDirection)
+        public void SetMatrix(WayMatrix wayMatrix) => _wayMatrix = wayMatrix;
+
+        public void Move(int x, int y)
         {
-            switch (swipeDirection)
-            {
-                case SwipeDirection.Up:
-                    CurrentPositionY--;
-                    break;
-
-                case SwipeDirection.Left:
-                    CurrentPositionX--;
-                    break;
-
-                case SwipeDirection.Zero:
-                    break;
-
-                case SwipeDirection.Right:
-                    CurrentPositionX++;
-                    break;
-
-                case SwipeDirection.Down:
-                    CurrentPositionY++;
-                    break;
-            }
-
+            Debug.Log(_currentPositionX + " " + _currentPositionY);
+            Debug.Log($"{x} : {y}");
+            _currentPositionX += Mathf.Clamp(x, 0, _wayMatrix.Width - 1);
+            _currentPositionY += Mathf.Clamp(y, 0, _wayMatrix.Height - 1);
+            Debug.Log(_currentPositionX + " " + _currentPositionY);
             UpdatePosition();
         }
 
-        private void UpdatePosition() => transform.DOMove(_wayMatrix.GetPosition(CurrentPositionX, CurrentPositionY), _motionDuration);
+        private void UpdatePosition() => transform.DOMove(_wayMatrix.GetPosition(_currentPositionX, _currentPositionY), _motionDuration);
 
         private void OnDisable() => SwipeHandler.OnSwipe -= Move;
     }
