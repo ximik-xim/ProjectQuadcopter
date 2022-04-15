@@ -38,8 +38,8 @@ namespace Assets.Scripts
 
         private void CalculateDirection(Vector2 normalizedSwipeDirection, out int x, out int y)
         {
-            x = Mathf.RoundToInt(normalizedSwipeDirection.x);
-            y = Mathf.RoundToInt(normalizedSwipeDirection.y);
+            x = Mathf.RoundToInt(normalizedSwipeDirection.x - 0.2f * Mathf.Sign(normalizedSwipeDirection.x));
+            y = Mathf.RoundToInt(normalizedSwipeDirection.y - 0.2f * Mathf.Sign(normalizedSwipeDirection.y));
         }
 
         private void OnDisable() => EnhancedTouchSupport.Disable();
