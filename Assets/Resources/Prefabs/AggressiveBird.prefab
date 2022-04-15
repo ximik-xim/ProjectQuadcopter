@@ -91,6 +91,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7564642995679936221}
   - component: {fileID: 1637066925607362624}
+  - component: {fileID: 7773704828011146277}
+  - component: {fileID: 4644278493313307060}
+  - component: {fileID: 1159195284966485450}
   m_Layer: 0
   m_Name: AggressiveBird
   m_TagString: Untagged
@@ -125,7 +128,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc802150700ace4582cd7868fd4a6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selfSpeed: 0
+--- !u!114 &7773704828011146277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816714996948124956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90e64d6ed07e784b9ffed9c7816c5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selfSpeed: 10
+--- !u!65 &4644278493313307060
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816714996948124956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.5, z: 2}
+  m_Center: {x: 0, y: 0, z: 0.5}
+--- !u!54 &1159195284966485450
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3816714996948124956}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4307822453704392946
 GameObject:
   m_ObjectHideFlags: 0
