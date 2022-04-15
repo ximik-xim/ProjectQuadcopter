@@ -4,11 +4,18 @@ namespace Assets.Scripts
 {
     class AggressiveBirdFactory : ActorFactory<AggressiveBird>
     {
-        public AggressiveBirdFactory(AggressiveBird prefab, Container container) : base(prefab, container) { }
+        Quadcopter _quadcopter;
+
+        public AggressiveBirdFactory(AggressiveBird prefab, Container container, Quadcopter quadcopter) : base(prefab, container) 
+        {
+            _quadcopter = quadcopter;
+        }
 
         public override AggressiveBird GetCreated()
         {
-            throw new System.NotImplementedException();
+            AggressiveBird aggressiveBird = Object.Instantiate(_prefab, _container.transform);
+            aggressiveBird.AddReaction(new KnockedDownReaction(_quadcopter));
+            return aggressiveBird;
         }
     }
 }

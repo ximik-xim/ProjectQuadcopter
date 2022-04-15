@@ -4,16 +4,15 @@ namespace Assets.Scripts
 {
     class QuadcopterFactory : ActorFactory<Quadcopter>
     {
-        private Vector3 _spawnPosition;
+        private WayMatrix _wayMatrix;
 
-        public QuadcopterFactory(Quadcopter prefab, Container container, Vector3 spawnPosition) : base(prefab, container)
-        {
-            _spawnPosition = spawnPosition;
-        }
+        public QuadcopterFactory(Quadcopter prefab, Container container, WayMatrix wayMatrix) : base(prefab, container) => _wayMatrix = wayMatrix;
 
         public override Quadcopter GetCreated()
         {
-            return Object.Instantiate(_prefab, _spawnPosition, Quaternion.identity, _container.transform);
+            Quadcopter quadcopter = Object.Instantiate(_prefab, _wayMatrix.Center, Quaternion.identity, _container.transform);
+            quadcopter.GetComponent<SwipeController>().SetMatrix(_wayMatrix);
+            return quadcopter;
         }
     }
 }

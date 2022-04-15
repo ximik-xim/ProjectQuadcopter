@@ -2,14 +2,10 @@
 
 namespace Assets.Scripts
 {
-    public class Net : Reactable, IRadiusReactable, ICollisionReactable
+    public class Net : Reactable, ICollisionReactable, IRadiusReactable
     {
-        protected override void Catch() => base.Catch();
+        public void OnTriggerEnter(Collider other) => TryGetReaction<KnockedDownReaction>().React();
 
-        protected override void LeanOutTheWindow() => base.LeanOutTheWindow();
-
-        public void OnCollisionEnter(Collision collision) => Catch();
-
-        public void OnRadiusEnter() => LeanOutTheWindow();
+        public void OnRadiusEnter(Quadcopter target) => TryGetReaction<LeanOutWindowReaction>().React();
     }
 }

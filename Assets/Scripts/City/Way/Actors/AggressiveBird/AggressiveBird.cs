@@ -4,8 +4,10 @@ namespace Assets.Scripts
 {
     public class AggressiveBird : Reactable, ICollisionReactable
     {
-        protected override void TakeHalfHP() => base.TakeHalfHP();
-
-        public void OnCollisionEnter(Collision collision) => base.TakeHalfHP();
+        public void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out Quadcopter quadcopter))
+                TryGetReaction<KnockedDownReaction>().React();
+        }
     }
 }
