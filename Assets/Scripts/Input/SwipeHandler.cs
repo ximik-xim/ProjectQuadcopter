@@ -10,7 +10,7 @@ namespace Assets.Scripts
         public static event Action<int, int> OnSwipe;
 
         [SerializeField] [Range(0, 1)] private float _directionThreshold;
-        [SerializeField] [Range(0, 300)] private int _deadZone;
+        [SerializeField] [Range(0, 1000)] private int _deadZone;
 
         public Vector2 StartContact { get; private set; }
         public Vector2 EndContact { get; private set; }
@@ -36,53 +36,12 @@ namespace Assets.Scripts
             }
         }
 
-        private void CalculateDirection(Vector2 swipeDirection, out int x, out int y)
+        private void CalculateDirection(Vector2 normalizedSwipeDirection, out int x, out int y)
         {
-            x = 0;
-            y = 0;
-
-            if (swipeDirection.x > 0.5f)
-            {
-                x = 1;
-            }
-            else if (swipeDirection.x < -0.5f)
-            {
-                x = -1;
-            }
-               
-
-            if (swipeDirection.y > 0.5f)
-            {
-                y = 1;
-            }
-            else if (swipeDirection.y < -0.5f)
-            {
-                y = -1;
-            }
-        }
-
-        private SwipeDirection DeterminateDirection(Vector2 swipeDirection)
-        {
-            if (Vector2.Dot(Vector2.left, swipeDirection) > _directionThreshold) return SwipeDirection.Left;
-
-            if (Vector2.Dot(Vector2.right, swipeDirection) > _directionThreshold) return SwipeDirection.Right;
-
-            if (Vector2.Dot(Vector2.up, swipeDirection) > _directionThreshold) return SwipeDirection.Up;
-
-            if (Vector2.Dot(Vector2.down, swipeDirection) > _directionThreshold) return SwipeDirection.Down;
-
-            return SwipeDirection.Zero;
+            x = Mathf.RoundToInt(normalizedSwipeDirection.x);
+            y = Mathf.RoundToInt(normalizedSwipeDirection.y);
         }
 
         private void OnDisable() => EnhancedTouchSupport.Disable();
-    }
-
-    public enum SwipeDirection
-    {
-                 Up,
-
-        Left,   Zero,  Right,
-
-                Down
     }
 }

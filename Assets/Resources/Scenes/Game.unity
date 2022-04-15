@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionThreshold: 0.5
-  _deadZone: 150
+  _deadZone: 200
 --- !u!1 &63567836
 GameObject:
   m_ObjectHideFlags: 0
