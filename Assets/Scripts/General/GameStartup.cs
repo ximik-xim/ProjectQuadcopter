@@ -27,10 +27,11 @@ namespace Assets.Scripts
 
         private void Start()
         {
+            _wayMatrix.Generate();
             _entitieContainer = ContainerService.GetCreatedContainer("EntityContainer", _city.transform, Vector3.zero);
+            SpeedService.SetStartSpeed(_startSpeed);
             GetCreatedActor(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix));
             GetCreatedActor(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.Center));
-            SpeedService.SetStartSpeed(_startSpeed);
             _chunkGenerator.Init(_city, _wayMatrix, _chunkPrefabs, 5);
         }
 
