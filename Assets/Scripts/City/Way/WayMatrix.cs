@@ -16,10 +16,9 @@ namespace Assets.Scripts
         public float Spacing => _spacing;
         public Vector3 Center => _matrix[_width / 2, _height / 2];
 
-        public void OnValidate()
+        public void Generate()
         {
             _matrix = new Vector2[Width, Height];
-
             float xCurrentIndex = -Spacing;
             float yCurrentIndex = Spacing;
 
