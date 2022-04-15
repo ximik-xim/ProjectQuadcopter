@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class SwipeHandler : MonoBehaviour
     {
-        public static event Action<SwipeDirection> OnSwipe;
+        public static event Action<int, int> OnSwipe;
 
         [SerializeField] [Range(0, 1)] private float _directionThreshold;
         [SerializeField] [Range(0, 300)] private int _deadZone;
@@ -30,7 +30,35 @@ namespace Assets.Scripts
             Vector2 swipeDirection = (EndContact - StartContact);
 
             if (swipeDirection.magnitude >= _deadZone)
-                OnSwipe?.Invoke(DeterminateDirection(swipeDirection.normalized));
+            {
+                CalculateDirection(swipeDirection.normalized, out int x, out int y);
+                OnSwipe?.Invoke(x, y);
+            }
+        }
+
+        private void CalculateDirection(Vector2 swipeDirection, out int x, out int y)
+        {
+            x = 0;
+            y = 0;
+
+            if (swipeDirection.x > 0.5f)
+            {
+                x = 1;
+            }
+            else if (swipeDirection.x < -0.5f)
+            {
+                x = -1;
+            }
+               
+
+            if (swipeDirection.y > 0.5f)
+            {
+                y = 1;
+            }
+            else if (swipeDirection.y < -0.5f)
+            {
+                y = -1;
+            }
         }
 
         private SwipeDirection DeterminateDirection(Vector2 swipeDirection)
