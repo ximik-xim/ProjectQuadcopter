@@ -7,25 +7,41 @@ namespace Assets.Scripts
     {
         [SerializeField] [Range(0, 1)] private float _motionDuration;
         private WayMatrix _wayMatrix;
-        private int _currentPositionX = 1;
-        private int _currentPositionY = 1;
+        private int _currentPositionX;
+        private int _currentPositionY;
 
-        private void OnEnable() => SwipeHandler.OnSwipe += Move;
+        public int CurrentPositionX
+        {
+            get => _currentPositionX;
+
+            private set => _currentPositionX = Mathf.Clamp(value, 0, _wayMatrix.Width - 1);
+        }
+        public int CurrentPositionY
+        {
+            get => _currentPositionY;
+
+            private set => _currentPositionY = Mathf.Clamp(value, 0, _wayMatrix.Height - 1);
+        }
+
+        private void OnEnable() => SwipeHandler.OnSwipe += UpdatePosition;
 
         public void SetMatrix(WayMatrix wayMatrix) => _wayMatrix = wayMatrix;
 
-        public void Move(int x, int y)
+        public void SetStartPosition(int x, int y)
         {
-            Debug.Log(_currentPositionX + " " + _currentPositionY);
-            Debug.Log($"{x} : {y}");
-            _currentPositionX += Mathf.Clamp(x, 0, _wayMatrix.Width - 1);
-            _currentPositionY += Mathf.Clamp(y, 0, _wayMatrix.Height - 1);
-            Debug.Log(_currentPositionX + " " + _currentPositionY);
-            UpdatePosition();
+            CurrentPositionX = x;
+            CurrentPositionY = y;
         }
 
-        private void UpdatePosition() => transform.DOMove(_wayMatrix.GetPosition(_currentPositionX, _currentPositionY), _motionDuration);
+        private void UpdatePosition(int x, int y)
+        {
+            CurrentPositionX += x;
+            CurrentPositionY -= y;
+            Move();
+        }
 
-        private void OnDisable() => SwipeHandler.OnSwipe -= Move;
+        private void Move() => transform.DOMove(_wayMatrix.GetPosition(CurrentPositionX, CurrentPositionY), _motionDuration);
+
+        private void OnDisable() => SwipeHandler.OnSwipe -= UpdatePosition;
     }
 }
