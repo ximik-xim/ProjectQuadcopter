@@ -10,8 +10,14 @@ namespace Assets.Scripts
 
         public override Quadcopter GetCreated()
         {
-            Quadcopter quadcopter = Object.Instantiate(_prefab, _wayMatrix.Center, Quaternion.identity, _container.transform);
-            quadcopter.GetComponent<SwipeController>().SetMatrix(_wayMatrix);
+            Quadcopter quadcopter = Object.Instantiate(_prefab, _container.transform);
+            SwipeController swipeController = quadcopter.GetComponent<SwipeController>();
+            swipeController.SetMatrix(_wayMatrix);
+            swipeController.SetStartPosition(1, 1);
+
+            quadcopter.transform.position = _wayMatrix
+                .GetPosition(swipeController.CurrentPositionX, swipeController.CurrentPositionY);
+
             return quadcopter;
         }
     }
