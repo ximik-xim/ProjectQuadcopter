@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class AggressiveBirdFactory : ActorFactory<AggressiveBird>
+    class AggressiveBirdFactory : EntityFactory<AggressiveBird>
     {
         Quadcopter _quadcopter;
 

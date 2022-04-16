@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts
 {
-    public class Quadcopter : Actor 
+    public class PlayerCamera : Entity
     {
         public override void Construct()
         {

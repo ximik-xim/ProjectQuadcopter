@@ -7,6 +7,8 @@ namespace Assets.Scripts
 
     public class ChunkGenerator : MonoBehaviour
     {
+        [SerializeField] private List<Chunk> _chunkPrefabs;
+        [Space(30)]
         [SerializeField] [Range(10, 500)] private float _horizon;
         [SerializeField][Range(1, 100)] private int _startableChunksAmount;
 
@@ -15,15 +17,16 @@ namespace Assets.Scripts
         private ChunkFactory _chunkFactory;
         private Pool<Chunk> _chunksPool;
         private Vector3 _spawnPosition;
+        private EntitySpawner _entitySpawner;
 
-        public void Init(City city, WayMatrix wayMatrix, ActorCreator entitySpawner, IEnumerable<Chunk> prefabs)
+        public void Init(City city, WayMatrix wayMatrix, EntitySpawner entitySpawner)
         {
-            List<Chunk> chunksPrefabs = new List<Chunk>(prefabs);
             _wayMatrix = wayMatrix;
+            _entitySpawner = entitySpawner;
             _spawnPosition = new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _horizon);
             _chunkContainer = ContainerService.GetCreatedContainer("ChunkContainer", city.transform, _spawnPosition);
-            _chunkFactory = new ChunkFactory(prefabs, _chunkContainer);
-            _chunksPool.Init(_chunkFactory, _chunkContainer, chunksPrefabs.Count);
+            _chunkFactory = new ChunkFactory(_chunkPrefabs, _chunkContainer);
+            _chunksPool.Init(_chunkFactory, _chunkContainer, _chunkPrefabs.Count);
             GenerateStartableChunks(_startableChunksAmount);
         }
 

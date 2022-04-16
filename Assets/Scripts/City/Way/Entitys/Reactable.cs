@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assets.Scripts
 {
-    public abstract class Reactable : Actor
+    public abstract class Reactable : Entity
     {
         protected Dictionary<Type, IReaction> _reactions = new Dictionary<Type, IReaction>();
 

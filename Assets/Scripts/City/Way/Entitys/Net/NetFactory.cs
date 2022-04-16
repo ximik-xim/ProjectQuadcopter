@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class NetFactory : ActorFactory<Net>
+    class NetFactory : EntityFactory<Net>
     {
         Quadcopter _quadcopter;
 
