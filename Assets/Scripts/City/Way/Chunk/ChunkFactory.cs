@@ -7,23 +7,20 @@ namespace Assets.Scripts
     {
         private List<Chunk> _prefabs;
         private Container _container;
-        private int _prefabIndex = -1;
+        private int _prefabIndex = 0;
 
-        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container, out float chunkSize)
+        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container)
         {
             _prefabs = new List<Chunk>(prefabs);
             _container = container;
-            chunkSize = _prefabs[0].GetComponentInChildren<MeshRenderer>().bounds.size.z;
         }
 
         public Chunk GetCreated()
         {
-            _prefabIndex++;
-
-            if (_prefabIndex == _prefabs.Count)
-                _prefabIndex = 0;
-
+            _prefabIndex = (_prefabIndex == _prefabs.Count) ? 0 : _prefabIndex;
             Chunk chunk = Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
+            _prefabIndex++;
+            chunk.Construct();
             return chunk;
         }
     }
