@@ -2,5 +2,8 @@
 
 namespace Assets.Scripts
 {
-    public class Actor : MonoBehaviour { }
+    public abstract class Actor : MonoBehaviour 
+    {
+        public abstract void Construct();
+    }
 }
