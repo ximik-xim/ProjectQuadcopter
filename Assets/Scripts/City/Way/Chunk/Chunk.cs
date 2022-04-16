@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class Chunk : Mover 
+    public class Chunk : MonoBehaviour 
     {
-        public float Size => GetComponentInChildren<MeshRenderer>().bounds.size.z;
+        
     }
 }
