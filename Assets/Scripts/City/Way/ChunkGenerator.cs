@@ -15,7 +15,6 @@ namespace Assets.Scripts
         private Pool<Chunk> _chunksPool;
         private float _chunkSize;
         private Vector3 _spawnPosition;
-        private Vector3 _destroyPosition;
 
         public void Init(City city, WayMatrix wayMatrix, List<Chunk> prefabs, int startableChunksAmount)
         {
@@ -33,17 +32,11 @@ namespace Assets.Scripts
 
             for (int i = 0; i < amount; i++)
             {
-                SpawnChunk(spawnPosition);
+                GetSpawnedChunk(spawnPosition);
                 spawnPosition.z -= _chunkSize;
             }
-
-            spawnPosition.z -= _chunkSize;
-            _destroyPosition = spawnPosition;
         }
 
-        public void SpawnChunk(Vector3 position)
-        {
-            _chunksPool.Get(position);
-        }
+        public Chunk GetSpawnedChunk(Vector3 position) => _chunksPool.Get(position);
     }
 }
