@@ -26,7 +26,7 @@ namespace Assets.Scripts
             _spawnPosition = new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _horizon);
             _chunkContainer = ContainerService.GetCreatedContainer("ChunkContainer", city.transform, _spawnPosition);
             _chunkFactory = new ChunkFactory(_chunkPrefabs, _chunkContainer);
-            _chunksPool.Init(_chunkFactory, _chunkContainer, _chunkPrefabs.Count);
+            _chunksPool = new Pool<Chunk>(_chunkFactory, _chunkContainer, _chunkPrefabs.Count);
             GenerateStartableChunks(_startableChunksAmount);
         }
 
