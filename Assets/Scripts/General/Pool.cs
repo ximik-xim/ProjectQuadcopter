@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public struct Pool<T> where T : MonoBehaviour
+    public class Pool<T> where T : MonoBehaviour
     {
         private IFactory<T> _factory;
         private List<T> _elements;
         private Container _container;
 
-        public void Init(IFactory<T> factory, Container container, int amount)
+        public Pool(IFactory<T> factory, Container container, int amount)
         {
             _factory = factory;
             _container = container;
