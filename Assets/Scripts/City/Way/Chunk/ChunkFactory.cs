@@ -9,11 +9,11 @@ namespace Assets.Scripts
         private Container _container;
         private int _prefabIndex = -1;
 
-        public ChunkFactory(List<Chunk> prefabs, Container container, out float chunkSize)
+        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container, out float chunkSize)
         {
-            _prefabs = prefabs;
+            _prefabs = new List<Chunk>(prefabs);
             _container = container;
-            chunkSize = _prefabs[0].Size;
+            chunkSize = _prefabs[0].GetComponentInChildren<MeshRenderer>().bounds.size.z;
         }
 
         public Chunk GetCreated()
