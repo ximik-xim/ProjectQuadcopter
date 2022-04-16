@@ -5,11 +5,16 @@ namespace Assets.Scripts
     [CreateAssetMenu(menuName = "Way Matrix", fileName = "New Way Matrix")]
     public class WayMatrix : ScriptableObject
     {
-        [SerializeField] [Range(2, 10)] private int _width;
-        [SerializeField] [Range(2, 10)] private int _height;
+        [SerializeField] [Range(1, 9)] private int _width;
+        [SerializeField] [Range(1, 9)] private int _height;
         [SerializeField] [Range(1, 10)] private float _spacing;
 
         private Vector2[,] _matrix;
+
+        void OnValidate()
+        {
+            _width = (int)Mathf.Round(_width / 2) * 2 + 1;
+        }
 
         public int Width => _width;
         public int Height => _height;
