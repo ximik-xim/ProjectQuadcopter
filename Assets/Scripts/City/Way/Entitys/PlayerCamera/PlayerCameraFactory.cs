@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class PlayerCameraFactory : ActorFactory<PlayerCamera>
+    class PlayerCameraFactory : EntityFactory<PlayerCamera>
     {
         private Vector2 _position;
 

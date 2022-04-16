@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts
 {
-    class QuadcopterFactory : ActorFactory<Quadcopter>
+    class QuadcopterFactory : EntityFactory<Quadcopter>
     {
         private WayMatrix _wayMatrix;
 
