@@ -22,7 +22,7 @@ namespace Assets.Scripts
         [Header("Configurations")]
         [SerializeField] [Range(10, 100)] private float _startSpeed;
 
-        
+        private ActorCreator _entitySpawner = new ActorCreator();
         private Container _entitieContainer;
 
         private void Start()
@@ -30,11 +30,9 @@ namespace Assets.Scripts
             _wayMatrix.Generate();
             _entitieContainer = ContainerService.GetCreatedContainer("EntityContainer", _city.transform, Vector3.zero);
             SpeedService.SetStartSpeed(_startSpeed);
-            GetCreatedActor(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix));
-            GetCreatedActor(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.Center));
-            _chunkGenerator.Init(_city, _wayMatrix, _chunkPrefabs, 5);
+            _entitySpawner.GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, _entitieContainer, _wayMatrix));
+            _entitySpawner.GetCreatedEntity(new PlayerCameraFactory(_playerCameraPrefab, _entitieContainer, _wayMatrix.Center));
+            _chunkGenerator.Init(_city, _wayMatrix, _entitySpawner, _chunkPrefabs);
         }
-
-        private T GetCreatedActor<T>(IFactory<T> factory) where T : Actor => factory.GetCreated();
     }
 }
