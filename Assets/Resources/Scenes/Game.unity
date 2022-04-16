@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionThreshold: 0.5
-  _deadZone: 200
+  _deadZone: 250
 --- !u!1 &63567836
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _horizon: 100
+  _startableChunksAmount: 5
 --- !u!1 &660147728
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ MonoBehaviour:
   - {fileID: -1471220750757077440, guid: d209540c019e14b40ac489e8239f83e5, type: 3}
   - {fileID: 7946600438839257562, guid: d32b812a8f915fd4a84c41e46755c1a0, type: 3}
   - {fileID: -1925305964513043887, guid: 01fe2093536242a42986ac4722490f21, type: 3}
-  _startSpeed: 10
+  _startSpeed: 15
 --- !u!1 &1414658730
 GameObject:
   m_ObjectHideFlags: 0
