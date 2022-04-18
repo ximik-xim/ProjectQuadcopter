@@ -22,7 +22,7 @@ namespace Assets.Scripts
 
         public void Init(City city, WayMatrix wayMatrix)
         {
-            EntitieContainer = ContainerService.GetCreatedContainer("EntityContainer", city.transform, Vector3.zero);
+            EntitieContainer = ContainerService.GetCreatedContainer("Entities", city.transform, Vector3.zero);
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, EntitieContainer, wayMatrix));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraPrefab, EntitieContainer, wayMatrix.Center));
             AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
