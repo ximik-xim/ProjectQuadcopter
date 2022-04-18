@@ -6,14 +6,14 @@ namespace Assets.Scripts
     {
         Quadcopter _quadcopter;
 
-        public AggressiveBirdFactory(AggressiveBird prefab, Container container, Quadcopter quadcopter) : base(prefab, container) 
+        public AggressiveBirdFactory(AggressiveBird prefab, Quadcopter quadcopter) : base(prefab) 
         {
             _quadcopter = quadcopter;
         }
 
         public override AggressiveBird GetCreated()
         {
-            AggressiveBird aggressiveBird = Object.Instantiate(_prefab, _container.transform);
+            AggressiveBird aggressiveBird = Object.Instantiate(_prefab);
             aggressiveBird.AddReaction(new KnockedDownReaction(_quadcopter));
             return aggressiveBird;
         }

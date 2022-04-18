@@ -15,12 +15,20 @@ namespace Assets.Scripts
         [SerializeField] private Net _netPrefab;
 
         public Container EntitieContainer { get; private set; }
+        public Pool<AggressiveBird> AggressiveBirdPool { get; private set; }
+        public Pool<Car> CarPool { get; private set; }
+        public Pool<Clothesline> ClotheslinePool { get; private set; }
+        public Pool<Net> NetPool { get; private set; }
 
         public void Init(City city, WayMatrix wayMatrix)
         {
             EntitieContainer = ContainerService.GetCreatedContainer("EntityContainer", city.transform, Vector3.zero);
-            GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, EntitieContainer, wayMatrix));
+            Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, EntitieContainer, wayMatrix));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraPrefab, EntitieContainer, wayMatrix.Center));
+            AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
+            //CarPool = new Pool<Car>(new CarFactory(_carPrefab), EntitieContainer, 10);
+            //ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefab), EntitieContainer, 10);
+            //NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10);
         }
 
         private E GetCreatedEntity<E>(EntityFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
