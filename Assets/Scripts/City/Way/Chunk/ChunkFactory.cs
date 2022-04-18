@@ -20,7 +20,6 @@ namespace Assets.Scripts
             _prefabIndex = (_prefabIndex == _prefabs.Count) ? 0 : _prefabIndex;
             Chunk chunk = Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
             _prefabIndex++;
-            chunk.Construct();
             return chunk;
         }
     }
