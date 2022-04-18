@@ -6,7 +6,7 @@ namespace Assets.Scripts
     {
         Quadcopter _quadcopter;
 
-        public NetFactory(Net prefab, Container container, Quadcopter quadcopter) : base(prefab, container) 
+        public NetFactory(Net prefab, Quadcopter quadcopter) : base(prefab) 
         {
             _quadcopter = quadcopter;
         }

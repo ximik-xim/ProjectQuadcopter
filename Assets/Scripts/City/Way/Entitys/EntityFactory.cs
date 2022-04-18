@@ -5,6 +5,8 @@
         protected E _prefab;
         protected Container _container;
 
+        public EntityFactory(E prefab) => _prefab = prefab;
+
         public EntityFactory(E prefab, Container container)
         {
             _prefab = prefab;

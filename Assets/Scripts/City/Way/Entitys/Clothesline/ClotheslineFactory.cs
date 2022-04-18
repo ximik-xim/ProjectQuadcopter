@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     class ClotheslineFactory : EntityFactory<Clothesline>
     {
-        public ClotheslineFactory(Clothesline prefab, Container container) : base(prefab, container) { }
+        public ClotheslineFactory(Clothesline prefab) : base(prefab) { }
 
         public override Clothesline GetCreated()
         {
