@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public class SpeedService : MonoBehaviour
     {
-        private const float SpeedUpValue = 0.001f;
+        private const float SpeedUpValue = 0.005f;
 
         public static float Speed { get; private set; }
 
