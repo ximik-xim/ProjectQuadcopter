@@ -25,7 +25,7 @@ namespace Assets.Scripts
             EntitieContainer = ContainerService.GetCreatedContainer("Entities", city.transform, Vector3.zero);
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, EntitieContainer, wayMatrix));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraPrefab, EntitieContainer, wayMatrix.Center));
-            AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
+            //AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
             //CarPool = new Pool<Car>(new CarFactory(_carPrefab), EntitieContainer, 10);
             //ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefab), EntitieContainer, 10);
             //NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10);
