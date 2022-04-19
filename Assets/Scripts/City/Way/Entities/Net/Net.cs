@@ -6,6 +6,6 @@ namespace Assets.Scripts
     {
         public void OnTriggerEnter(Collider other) => TryGetReaction<KnockedDownReaction>().React();
 
-        public void OnRadiusEnter(Quadcopter target) => TryGetReaction<LeanOutWindowReaction>().React();
+        public void OnRadiusEnter() => TryGetReaction<LeanOutWindowReaction>().React();
     }
 }

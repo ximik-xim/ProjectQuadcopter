@@ -13,9 +13,12 @@ namespace Assets.Scripts
 
         public override Net GetCreated()
         {
-            Net net = Object.Instantiate(_prefab, _container.transform);
+            Net net = Object.Instantiate(_prefab);
+            RadiusableDetector radiusableDetector = net.GetComponent<RadiusableDetector>();
             net.AddReaction(new LeanOutWindowReaction());
             net.AddReaction(new KnockedDownReaction(_quadcopter));
+            radiusableDetector.SetTarget(_quadcopter);
+            radiusableDetector.OnRadiusEnter += net.OnRadiusEnter;
             return net;
         }
     }

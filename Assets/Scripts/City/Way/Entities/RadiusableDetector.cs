@@ -4,9 +4,11 @@ using UnityEditor;
 
 namespace Assets.Scripts
 {
+    public delegate void RadiusEnterHandler();
+
     public class RadiusableDetector : MonoBehaviour
     {
-        public event EventHandler<Quadcopter> OnRadiusEnter;
+        public event RadiusEnterHandler OnRadiusEnter;
 
         [SerializeField] [Range(1, 10)] private float _radius;
 
@@ -24,7 +26,7 @@ namespace Assets.Scripts
         {
             if (IsTargetInRadius() && _isDetection)
             {
-                OnRadiusEnter?.Invoke(this, Target);
+                OnRadiusEnter?.Invoke();
                 _isDetection = false;
             }
 
@@ -51,6 +53,6 @@ namespace Assets.Scripts
     //        RadiusableDetector detector = target as RadiusableDetector;
     //        Handles.color = Color.red;
     //        Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
-    //    }
+    //   }
     //}
 }

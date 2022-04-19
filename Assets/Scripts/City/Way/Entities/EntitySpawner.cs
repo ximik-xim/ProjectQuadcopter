@@ -28,7 +28,7 @@ namespace Assets.Scripts
             //AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
             //CarPool = new Pool<Car>(new CarFactory(_carPrefab), EntitieContainer, 10);
             //ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefab), EntitieContainer, 10);
-            //NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10);
+            NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10); // его надо
         }
 
         private E GetCreatedEntity<E>(EntityFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
