@@ -653,7 +653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _city: {fileID: 1414658732}
   _wayMatrix: {fileID: 11400000, guid: 9e5edbba07892204ca8f6731437f01a4, type: 2}
-  _startSpeed: 15
+  _startSpeed: 20
 --- !u!1 &1703405852
 GameObject:
   m_ObjectHideFlags: 0
