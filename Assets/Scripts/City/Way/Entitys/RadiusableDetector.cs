@@ -43,14 +43,14 @@ namespace Assets.Scripts
         private void OnDisable() => UpdateService.OnUpdate -= Detect;
     }
 
-    [CustomEditor(typeof(RadiusableDetector))]
-    public class TargetDetectorEditor : Editor
-    {
-        private void OnSceneGUI()
-        {
-            RadiusableDetector detector = target as RadiusableDetector;
-            Handles.color = Color.red;
-            Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
-        }
-    }
+    //[CustomEditor(typeof(RadiusableDetector))]
+    //public class TargetDetectorEditor : Editor
+    //{
+    //    private void OnSceneGUI()
+    //    {
+    //        RadiusableDetector detector = target as RadiusableDetector;
+    //        Handles.color = Color.red;
+    //        Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
+    //    }
+    //}
 }
