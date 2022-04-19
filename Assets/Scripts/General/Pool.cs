@@ -29,7 +29,9 @@ namespace Assets.Scripts
                 return availableElement;
             }
 
-            return Create(true);
+            T createdElement = Create(true);
+            createdElement.transform.position = spawnPosition;
+            return createdElement;
         }
 
         private void PoolUp(T element, bool isActive)
