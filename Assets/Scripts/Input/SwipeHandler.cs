@@ -9,7 +9,6 @@ namespace Assets.Scripts
     {
         public static event Action<int, int> OnSwipe;
 
-        [SerializeField] [Range(0, 1)] private float _directionThreshold;
         [SerializeField] [Range(0, 1000)] private int _deadZone;
 
         public Vector2 StartContact { get; private set; }

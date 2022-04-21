@@ -4,11 +4,15 @@ namespace Assets.Scripts
 {
     class ClotheslineFactory : EntityFactory<Clothesline>
     {
-        public ClotheslineFactory(Clothesline prefab) : base(prefab) { }
+        private Quadcopter _quadcopter;
+
+        public ClotheslineFactory(Clothesline prefab, Quadcopter quadcopter) : base(prefab) => _quadcopter = quadcopter;
 
         public override Clothesline GetCreated()
         {
-            throw new System.NotImplementedException();
+            Clothesline clothesline = Object.Instantiate(_prefab);
+            clothesline.AddReaction(new KnockedDownReaction(_quadcopter));
+            return clothesline;
         }
     }
 }
