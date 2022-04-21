@@ -4,11 +4,15 @@ namespace Assets.Scripts
 {
     class CarFactory : EntityFactory<Car>
     {
-        public CarFactory(Car prefab) : base(prefab) { }
+        private Quadcopter _quadcopter;
+
+        public CarFactory(Car prefab, Quadcopter quadcopter) : base(prefab) => _quadcopter = quadcopter;
 
         public override Car GetCreated()
         {
-            throw new System.NotImplementedException();
+            Car car = Object.Instantiate(_prefab);
+            car.AddReaction(new KnockedDownReaction(_quadcopter));
+            return car;
         }
     }
 }
