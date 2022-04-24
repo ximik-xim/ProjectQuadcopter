@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b310956ef6b8a64e838b38905e32f91, type: 3}
   m_Name: WayMatrix
   m_EditorClassIdentifier: 
-  _width: 0
-  _height: 0
-  _spacing: 0
+  _width: 3
+  _height: 3
+  _spacing: 4

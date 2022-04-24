@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c35252cfba45e145be87092c9391df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directionThreshold: 0.5
   _deadZone: 250
 --- !u!1 &63567836
 GameObject:
@@ -288,7 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chunkPrefabs:
-  - {fileID: 9191757689737021188, guid: 7e09c5cc818acd042962a12b0e4e8abc, type: 3}
+  - {fileID: 7991555287911481885, guid: 7e09c5cc818acd042962a12b0e4e8abc, type: 3}
   - {fileID: 6328417353234506659, guid: 1adb428b4a2889147966786232580af1, type: 3}
   - {fileID: -840939647595525456, guid: 318db1cef752eb047a78c1a5a1af7f31, type: 3}
   - {fileID: 6406978364637998829, guid: a673f34a113bc0d48911658cddd58050, type: 3}
@@ -653,7 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _city: {fileID: 1414658732}
   _wayMatrix: {fileID: 11400000, guid: 9e5edbba07892204ca8f6731437f01a4, type: 2}
-  _startSpeed: 20
+  _startSpeed: 25
 --- !u!1 &1703405852
 GameObject:
   m_ObjectHideFlags: 0
