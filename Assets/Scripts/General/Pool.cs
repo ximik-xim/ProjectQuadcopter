@@ -16,9 +16,7 @@ namespace Assets.Scripts
             _elements = new List<T>();
 
             for (int i = 0; i < amount; i++)
-            {
                 Create(false);
-            }
         }
 
         public T Get(Vector3 spawnPosition)

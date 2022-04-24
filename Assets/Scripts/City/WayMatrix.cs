@@ -11,10 +11,7 @@ namespace Assets.Scripts
 
         private Vector2[,] _matrix;
 
-        void OnValidate()
-        {
-            _width = (int)Mathf.Round(_width / 2) * 2 + 1;
-        }
+        void OnValidate() => _width = (int)Mathf.Round(_width / 2) * 2 + 1;
 
         public int Width => _width;
         public int Height => _height;

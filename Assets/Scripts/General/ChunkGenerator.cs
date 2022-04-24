@@ -29,21 +29,20 @@ namespace Assets.Scripts
 
         private void GenerateStartableChunks(int amount)
         {
-            amount--;
-            _lastSpawnedChunk = GetSpawnedChunk(_wayMatrix.Center);
+            _lastSpawnedChunk = GetGeneratedChunk(_wayMatrix.Center);
 
-            for (int i = 0; i < amount; i++)
-                GetSpawnedChunk(_lastSpawnedChunk.ConnectPosition);
+            for (int i = -1; i < amount; i++)
+                GetGeneratedChunk(_lastSpawnedChunk.ConnectPosition);
         }
 
-        public Chunk GetSpawnedChunk(Vector3 position)
+        public Chunk GetGeneratedChunk(Vector3 position)
         {
             Chunk spawnedChunk =  _chunksPool.Get(position);
-            spawnedChunk.GenerateWindows();
+            spawnedChunk.SetWindows();
             _lastSpawnedChunk = spawnedChunk;
             return spawnedChunk;
         }
 
-        public void SpawnChunk() => GetSpawnedChunk(_lastSpawnedChunk.ConnectPosition);
+        public void SpawnChunk() => GetGeneratedChunk(_lastSpawnedChunk.ConnectPosition);
     }
 }

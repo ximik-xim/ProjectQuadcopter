@@ -23,9 +23,10 @@ namespace Assets.Scripts
         {
             _prefabIndex = (_prefabIndex == _prefabs.Count) ? 0 : _prefabIndex;
             Chunk chunk = Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
+            Disappearer disappearer = chunk.GetComponent<Disappearer>();
             _prefabIndex++;
-            chunk.OnDisappear += _spawnMethod;
-            chunk.SetDisappearPoint(new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _wayMatrix.Center.z - chunk.Size));
+            disappearer.OnDisappear += _spawnMethod;
+            disappearer.SetDisappearPoint(new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _wayMatrix.Center.z - chunk.Size));
             return chunk;
         }
     }
