@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public class DistanceMeter : MonoBehaviour
     {
-        private int _distance;
+        private float _distance;
 
         public string Distance { get; private set; }
 
@@ -12,7 +12,7 @@ namespace Assets.Scripts
 
         private void CalculateDistance()
         {
-            _distance += (int)(Time.deltaTime * SpeedService.Speed);
+            _distance += Time.deltaTime * SpeedService.Speed;
         }
 
         private void OnDisable() => UpdateService.OnUpdate -= CalculateDistance;
