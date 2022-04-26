@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -28,9 +26,9 @@ namespace Assets.Scripts
             AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
             CarPool = new Pool<Car>(new CarFactory(_carPrefab, quadcopter), EntitieContainer, 10);
             ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefab, quadcopter), EntitieContainer, 10);
-            NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10); // его надо
+            NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10);
         }
 
-        private E GetCreatedEntity<E>(EntityFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
+        private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
     }
 }
