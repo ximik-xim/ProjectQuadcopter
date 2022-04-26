@@ -13,7 +13,6 @@ namespace Assets.Scripts
         private void CalculateDistance()
         {
             _distance += Time.deltaTime * SpeedService.Speed;
-            //Distance = $"{kilometers} {meters}"
         }
 
         private void OnDisable() => UpdateService.OnUpdate -= CalculateDistance;
