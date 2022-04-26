@@ -2,14 +2,16 @@
 
 namespace Assets.Scripts
 {
-    public class Mover : MonoBehaviour
+    public sealed class Mover : MonoBehaviour
     {
-        [SerializeField] [Range(1, 100)] protected float _selfSpeed;
+        private float _selfSpeed;
 
-        protected void OnEnable() => UpdateService.OnFixedUpdate += Move;
+        private void OnEnable() => UpdateService.OnFixedUpdate += Move;
 
-        protected void Move() => transform.position += (SpeedService.Speed + _selfSpeed) * Time.fixedDeltaTime * Vector3.back;
+        public void SetSelfSpeed(float selfSpeed) => _selfSpeed = selfSpeed;
 
-        protected void OnDisable() => UpdateService.OnFixedUpdate -= Move;
+        private void Move() => transform.position += (SpeedService.Speed + _selfSpeed) * Time.fixedDeltaTime * Vector3.back;
+
+        private void OnDisable() => UpdateService.OnFixedUpdate -= Move;
     }
 }

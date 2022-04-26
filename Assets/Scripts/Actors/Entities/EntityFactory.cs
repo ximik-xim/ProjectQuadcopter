@@ -1,18 +1,15 @@
-﻿namespace Assets.Scripts
+﻿using UnityEngine;
+
+namespace Assets.Scripts
 {
-    abstract class EntityFactory<E> : IFactory<E> where E : Entity
+    public abstract class EntityFactory<E> : ActorFactory<E> where E : Entity
     {
-        protected E _prefab;
-        protected Container _container;
+        protected Quadcopter _quadcopter;
 
-        public EntityFactory(E prefab) => _prefab = prefab;
+        public EntityFactory(E prefab, Quadcopter quadcopter) : base(prefab) { }
 
-        public EntityFactory(E prefab, Container container)
-        {
-            _prefab = prefab;
-            _container = container;
-        }
+        public EntityFactory(E prefab, Container container, Quadcopter quadcopter) : base(prefab, container) { }
 
-        public abstract E GetCreated();
+        public EntityFactory(E prefab, Container container, Vector3 spawnPosition, Quadcopter quadcopter) : base(prefab, container, spawnPosition) { }
     }
 }
