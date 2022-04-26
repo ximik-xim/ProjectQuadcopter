@@ -5,7 +5,7 @@ namespace Assets.Scripts
 {
     public class SwipeController : MonoBehaviour
     {
-        [SerializeField] [Range(0, 1)] private float _motionDuration;
+        private float _motionDuration;
         private WayMatrix _wayMatrix;
         private int _currentPositionX;
         private int _currentPositionY;
@@ -26,6 +26,8 @@ namespace Assets.Scripts
         private void OnEnable() => SwipeHandler.OnSwipe += UpdatePosition;
 
         public void SetMatrix(WayMatrix wayMatrix) => _wayMatrix = wayMatrix;
+
+        public void SetMotionDuration(float motionDuration) => _motionDuration = motionDuration;
 
         public void SetStartPosition(int x, int y)
         {
