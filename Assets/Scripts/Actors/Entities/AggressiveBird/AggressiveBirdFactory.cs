@@ -14,7 +14,7 @@ namespace Assets.Scripts
         public override AggressiveBird GetCreated()
         {
             AggressiveBird aggressiveBird = Object.Instantiate(_prefab);
-            aggressiveBird.AddReaction(new KnockedDownReaction(_quadcopter));
+            aggressiveBird.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
             return aggressiveBird;
         }
     }

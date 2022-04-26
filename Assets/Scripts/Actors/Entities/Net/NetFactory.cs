@@ -14,11 +14,8 @@ namespace Assets.Scripts
         public override Net GetCreated()
         {
             Net net = Object.Instantiate(_prefab);
-            RadiusableDetector radiusableDetector = net.GetComponent<RadiusableDetector>();
-            net.AddReaction(new LeanOutWindowReaction());
-            net.AddReaction(new KnockedDownReaction(_quadcopter));
-            radiusableDetector.SetTarget(_quadcopter);
-            radiusableDetector.OnRadiusEnter += net.OnRadiusEnter;
+            net.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
+            net.AddReaction<RadiusableDetector>(new LeanOutWindowReaction());
             return net;
         }
     }

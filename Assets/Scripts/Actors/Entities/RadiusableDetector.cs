@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System;
 
 namespace Assets.Scripts
 {
-    public delegate void RadiusEnterHandler();
-
-    public class RadiusableDetector : MonoBehaviour
+    public class RadiusableDetector : MonoBehaviour, IDetector
     {
-        public event RadiusEnterHandler OnRadiusEnter;
+        public event Action OnDetect;
 
         [SerializeField] [Range(1, 10)] private float _radius;
 
@@ -25,7 +24,7 @@ namespace Assets.Scripts
         {
             if (IsTargetInRadius() && _isDetection)
             {
-                OnRadiusEnter?.Invoke();
+                OnDetect?.Invoke();
                 _isDetection = false;
             }
 

@@ -11,7 +11,6 @@ namespace Assets.Scripts
         public override Car GetCreated()
         {
             Car car = Object.Instantiate(_prefab);
-            car.AddReaction(new KnockedDownReaction(_quadcopter));
             return car;
         }
     }
