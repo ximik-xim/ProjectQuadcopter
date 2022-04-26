@@ -11,7 +11,7 @@ namespace Assets.Scripts
         public override Clothesline GetCreated()
         {
             Clothesline clothesline = Object.Instantiate(_prefab);
-            clothesline.AddReaction(new KnockedDownReaction(_quadcopter));
+            clothesline.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
             return clothesline;
         }
     }
