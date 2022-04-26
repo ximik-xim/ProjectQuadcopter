@@ -8,7 +8,7 @@ namespace Assets.Scripts
     {
         public event Action OnDetect;
 
-        [SerializeField] [Range(1, 10)] private float _radius;
+        private float _radius;
 
         private Quadcopter _target;
         private bool _isDetection = true;
@@ -19,6 +19,8 @@ namespace Assets.Scripts
         private void OnEnable() => UpdateService.OnUpdate += Detect;
 
         public void SetTarget(Quadcopter target) => _target = target;
+
+        public void SetRadius(float radius) => _radius = radius;
 
         private void Detect()
         {
