@@ -2,24 +2,24 @@
 
 namespace Assets.Scripts
 {
-    public abstract class ActorFactory<A> : IFactory<A> where A : Actor
+    public abstract class ActorFactory<A, C> : IFactory<A> where A : Actor where C : Config
     {
-        protected A _prefab;
+        protected C _config;
         protected Container _container;
         protected Vector3 _spawnPosition;
 
-        public ActorFactory(A prefab) => _prefab = prefab;
+        public ActorFactory(C config) => _config = config;
 
-        public ActorFactory(A prefab, Container container)
+        public ActorFactory(C config, Container container)
         {
-            _prefab = prefab;
+            _config = config;
             _container = container;
             _spawnPosition = container.transform.position;
         }
 
-        public ActorFactory(A prefab, Container container, Vector3 spawnPosition)
+        public ActorFactory(C config, Container container, Vector3 spawnPosition)
         {
-            _prefab = prefab;
+            _config = config;
             _container = container;
             _spawnPosition = spawnPosition;
         }

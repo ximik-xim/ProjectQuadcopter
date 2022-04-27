@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class ClotheslineFactory : MultiplePrefabActorFactory<Clothesline>
+    class ClotheslineFactory : ActorFactory<Clothesline, ClotheslineConfig>
     {
         private Quadcopter _quadcopter;
 
-        public ClotheslineFactory(IEnumerable<Clothesline>prefabs, Quadcopter quadcopter) : base(prefabs) => _quadcopter = quadcopter;
+        public ClotheslineFactory(ClotheslineConfig config, Quadcopter quadcopter) : base(config) => _quadcopter = quadcopter;
 
         public override Clothesline GetCreated()
         {
-            Clothesline clothesline = Object.Instantiate(GetPrefab());
+            Clothesline clothesline = Object.Instantiate(_config.Prefab);
             clothesline.gameObject.AddComponent<Mover>();
             clothesline.gameObject.AddComponent<Disappearer>();
             clothesline.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));

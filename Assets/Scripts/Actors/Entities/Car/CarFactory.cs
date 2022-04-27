@@ -1,17 +1,16 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class CarFactory : MultiplePrefabActorFactory<Car>
+    class CarFactory : ActorFactory<Car, CarConfig>
     {
         private Quadcopter _quadcopter;
 
-        public CarFactory(IEnumerable<Car> prefabs, Quadcopter quadcopter) : base(prefabs) => _quadcopter = quadcopter;
+        public CarFactory(CarConfig config, Quadcopter quadcopter) : base(config) => _quadcopter = quadcopter;
 
         public override Car GetCreated()
         {
-            Car car = Object.Instantiate(GetPrefab());
+            Car car = Object.Instantiate(_config.Prefab);
             car.gameObject.AddComponent<Mover>().SetSelfSpeed(3);
             car.gameObject.AddComponent<Disappearer>();
             car.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));

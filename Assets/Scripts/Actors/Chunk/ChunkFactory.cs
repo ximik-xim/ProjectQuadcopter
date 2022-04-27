@@ -1,23 +1,21 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class ChunkFactory : MultiplePrefabActorFactory<Chunk>
+    public class ChunkFactory : ActorFactory<Chunk, ChunkConfig>
     {
         private WayMatrix _wayMatrix;
         SpawnMethod _spawnMethod;
 
-        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod) : base(prefabs, container)
+        public ChunkFactory(ChunkConfig config, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod) : base(config, container)
         {
-            _prefabIndex = 0;
             _wayMatrix = wayMatrix;
             _spawnMethod = spawnMethod;
         }
 
         public override Chunk GetCreated()
         {
-            Chunk chunk = Object.Instantiate(GetPrefab(), _container.transform);
+            Chunk chunk = Object.Instantiate(_config.Prefab, _container.transform);
             Disappearer disappearer = chunk.gameObject.AddComponent<Disappearer>();
             chunk.gameObject.AddComponent<Mover>();
             disappearer.OnDisappear += _spawnMethod;

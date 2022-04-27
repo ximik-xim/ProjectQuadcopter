@@ -2,11 +2,11 @@
 
 namespace Assets.Scripts
 {
-    class QuadcopterFactory : ActorFactory<Quadcopter>
+    class QuadcopterFactory : ActorFactory<Quadcopter, QuadcopterConfig>
     {
         private WayMatrix _wayMatrix;
 
-        public QuadcopterFactory(Quadcopter prefab, Container container, WayMatrix wayMatrix) : base(prefab, container)
+        public QuadcopterFactory(QuadcopterConfig config, Container container, WayMatrix wayMatrix) : base(config, container)
         {
             _wayMatrix = wayMatrix;
         }
@@ -14,11 +14,11 @@ namespace Assets.Scripts
 
         public override Quadcopter GetCreated()
         {
-            Quadcopter quadcopter = Object.Instantiate(_prefab, _container.transform);
+            Quadcopter quadcopter = Object.Instantiate(_config.Prefab, _container.transform);
             SwipeController swipeController = quadcopter.gameObject.AddComponent<SwipeController>();
             swipeController.SetMatrix(_wayMatrix);
             swipeController.SetStartPosition(1, 1);
-            swipeController.SetMotionDuration(0.3f);
+            swipeController.SetMotionDuration(_config.MotionDuration);
             quadcopter.transform.position = _wayMatrix.GetPosition(swipeController.CurrentPositionX, swipeController.CurrentPositionY);
 
             return quadcopter;

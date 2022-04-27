@@ -286,14 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3cea0d2f0e2794b87897c9e1f8aa7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chunkPrefabs:
-  - {fileID: 7991555287911481885, guid: 7e09c5cc818acd042962a12b0e4e8abc, type: 3}
-  - {fileID: 6328417353234506659, guid: 1adb428b4a2889147966786232580af1, type: 3}
-  - {fileID: -840939647595525456, guid: 318db1cef752eb047a78c1a5a1af7f31, type: 3}
-  - {fileID: 6406978364637998829, guid: a673f34a113bc0d48911658cddd58050, type: 3}
-  - {fileID: -1471220750757077440, guid: d209540c019e14b40ac489e8239f83e5, type: 3}
-  - {fileID: 7946600438839257562, guid: d32b812a8f915fd4a84c41e46755c1a0, type: 3}
-  - {fileID: -1925305964513043887, guid: 01fe2093536242a42986ac4722490f21, type: 3}
+  _chunkConfig: {fileID: 11400000, guid: d0b33549a8a9f504eaf3a663becbdbc3, type: 2}
   _startableChunksAmount: 10
 --- !u!1 &660147728
 GameObject:
@@ -881,15 +874,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ad2907aa6a3ce4baf460e30fe34638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quadcopterPrefab: {fileID: 163720967156421028, guid: 22f90b340925e154894b222624c01db1,
-    type: 3}
-  _playerCameraPrefab: {fileID: 7616779143748715643, guid: 9e3a0824e0ce6ee49af870a11efe2a3d,
-    type: 3}
-  _aggressiveBurdPrefabs:
-  - {fileID: 1637066925607362624, guid: 35b4309d921de97459bcbc7ccbc8d966, type: 3}
-  _carPrefabs:
-  - {fileID: 5066961233641141595, guid: f4deb85e11c91ea479774027be804021, type: 3}
-  _clotheslinePrefabs:
-  - {fileID: 6543055561499015604, guid: 8b8b717fc6d38fd4196f856827996425, type: 3}
-  _netPrefab: {fileID: 5917012183079924583, guid: b1fe09e495ac6734dbd206a74bb44d76,
-    type: 3}
+  _quadcopterConfig: {fileID: 11400000, guid: f9284fa7e5cd0d047a91d4e63761eea8, type: 2}
+  _playerCameraConfig: {fileID: 11400000, guid: 92959b057bfcf4540a00479b2bd1e8e7,
+    type: 2}
+  _aggressiveBurdConfig: {fileID: 11400000, guid: d61d9b9e67103bc4887cc29c8dad0231,
+    type: 2}
+  _carConfig: {fileID: 11400000, guid: 00e9123255ab195478a1979a8421fbda, type: 2}
+  _clotheslineConfig: {fileID: 11400000, guid: 65204631fb977c449bcd81a425fcb227, type: 2}
+  _netConfig: {fileID: 11400000, guid: 0380147e93dde074490ad04b07cd84a6, type: 2}
