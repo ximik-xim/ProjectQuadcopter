@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
-    class AggressiveBirdFactory : EntityFactory<AggressiveBird>
+    class AggressiveBirdFactory : MultiplePrefabActorFactory<AggressiveBird>
     {
-        public AggressiveBirdFactory(AggressiveBird prefab, Quadcopter quadcopter) : base(prefab, quadcopter) { }
+        private Quadcopter _quadcopter;
+
+        public AggressiveBirdFactory(IEnumerable<AggressiveBird> prefabs, Quadcopter quadcopter) : base(prefabs) => _quadcopter = quadcopter;
 
         public override AggressiveBird GetCreated()
         {
-            AggressiveBird aggressiveBird = Object.Instantiate(_prefab);
+            AggressiveBird aggressiveBird = Object.Instantiate(GetPrefab());
             aggressiveBird.gameObject.AddComponent<Mover>().SetSelfSpeed(5);
             aggressiveBird.gameObject.AddComponent<Disappearer>();
             aggressiveBird.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));

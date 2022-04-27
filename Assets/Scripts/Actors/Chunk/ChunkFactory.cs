@@ -3,28 +3,23 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class ChunkFactory : IFactory<Chunk>
+    public class ChunkFactory : MultiplePrefabActorFactory<Chunk>
     {
-        private List<Chunk> _prefabs;
-        private Container _container;
-        private int _prefabIndex = 0;
         private WayMatrix _wayMatrix;
         SpawnMethod _spawnMethod;
 
-        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod)
+        public ChunkFactory(IEnumerable<Chunk> prefabs, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod) : base(prefabs, container)
         {
-            _prefabs = new List<Chunk>(prefabs);
-            _container = container;
+            _prefabIndex = 0;
             _wayMatrix = wayMatrix;
             _spawnMethod = spawnMethod;
         }
 
-        public Chunk GetCreated()
+        public override Chunk GetCreated()
         {
-            _prefabIndex = (_prefabIndex == _prefabs.Count) ? 0 : _prefabIndex;
-            Chunk chunk = Object.Instantiate(_prefabs[_prefabIndex], _container.transform);
-            Disappearer disappearer = chunk.GetComponent<Disappearer>();
-            _prefabIndex++;
+            Chunk chunk = Object.Instantiate(GetPrefab(), _container.transform);
+            Disappearer disappearer = chunk.gameObject.AddComponent<Disappearer>();
+            chunk.gameObject.AddComponent<Mover>();
             disappearer.OnDisappear += _spawnMethod;
             disappearer.SetDisappearPoint(new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _wayMatrix.Center.z - chunk.Size));
             return chunk;

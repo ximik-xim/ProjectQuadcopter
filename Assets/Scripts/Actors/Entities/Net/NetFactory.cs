@@ -2,9 +2,11 @@
 
 namespace Assets.Scripts
 {
-    class NetFactory : EntityFactory<Net>
+    class NetFactory : ActorFactory<Net>
     {
-        public NetFactory(Net prefab, Quadcopter quadcopter) : base(prefab, quadcopter) { }
+        private Quadcopter _quadcopter;
+
+        public NetFactory(Net prefab, Quadcopter quadcopter) : base(prefab) => _quadcopter = quadcopter;
 
         public override Net GetCreated()
         {
