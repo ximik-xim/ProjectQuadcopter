@@ -20,7 +20,7 @@ namespace Assets.Scripts
         {
             float density = 10;
 
-            foreach (var spawnPoint in _spawnPoints)
+            foreach (SpawnPoint spawnPoint in _spawnPoints)
             {
                 if (Random.Range(0, 100) > density) continue;
                 Net net = entitySpawner.NetPool.Get(spawnPoint.transform.position);
