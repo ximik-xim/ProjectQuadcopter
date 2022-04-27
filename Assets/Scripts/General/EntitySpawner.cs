@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -7,9 +8,9 @@ namespace Assets.Scripts
         [Header("Prefabs")]
         [SerializeField] private Quadcopter _quadcopterPrefab;
         [SerializeField] private PlayerCamera _playerCameraPrefab;
-        [SerializeField] private AggressiveBird _aggressiveBurdPrefab;
-        [SerializeField] private Car _carPrefab;
-        [SerializeField] private Clothesline _clotheslinePrefab;
+        [SerializeField] private List<AggressiveBird> _aggressiveBurdPrefabs;
+        [SerializeField] private List<Car> _carPrefabs;
+        [SerializeField] private List<Clothesline> _clotheslinePrefabs;
         [SerializeField] private Net _netPrefab;
 
         public Container EntitieContainer { get; private set; }
@@ -23,9 +24,9 @@ namespace Assets.Scripts
             EntitieContainer = ContainerService.GetCreatedContainer("Entities", city.transform, Vector3.zero);
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterPrefab, EntitieContainer, wayMatrix));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraPrefab, EntitieContainer, wayMatrix.Center));
-            AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefab, quadcopter), EntitieContainer, 10);
-            CarPool = new Pool<Car>(new CarFactory(_carPrefab, quadcopter), EntitieContainer, 10);
-            ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefab, quadcopter), EntitieContainer, 10);
+            AggressiveBirdPool = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdPrefabs, quadcopter), EntitieContainer, 10);
+            CarPool = new Pool<Car>(new CarFactory(_carPrefabs, quadcopter), EntitieContainer, 10);
+            ClotheslinePool = new Pool<Clothesline>(new ClotheslineFactory(_clotheslinePrefabs, quadcopter), EntitieContainer, 10);
             NetPool = new Pool<Net>(new NetFactory(_netPrefab, quadcopter), EntitieContainer, 10);
         }
 
