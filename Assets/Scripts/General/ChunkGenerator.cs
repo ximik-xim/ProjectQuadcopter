@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -7,7 +6,7 @@ namespace Assets.Scripts
 
     public class ChunkGenerator : MonoBehaviour
     {
-        [SerializeField] private List<Chunk> _chunkPrefabs;
+        [SerializeField] private ChunkConfig _chunkConfig;
         [Space(30)]
         [SerializeField] [Range(1, 100)] private int _startableChunksAmount;
 
@@ -22,8 +21,8 @@ namespace Assets.Scripts
             _wayMatrix = wayMatrix;
             _entitySpawner = entitySpawner;
             _chunkContainer = ContainerService.GetCreatedContainer("Chunks", city.transform, _wayMatrix.Center);
-            ChunkFactory chunkFactory = new ChunkFactory(_chunkPrefabs, _chunkContainer, wayMatrix, SpawnChunk);
-            _chunksPool = new Pool<Chunk>(chunkFactory, _chunkContainer, _chunkPrefabs.Count);
+            ChunkFactory chunkFactory = new ChunkFactory(_chunkConfig, _chunkContainer, wayMatrix, SpawnChunk);
+            _chunksPool = new Pool<Chunk>(chunkFactory, _chunkContainer, _chunkConfig.PrefabsCount);
             GenerateStartableChunks(_startableChunksAmount);
         }
 
