@@ -885,11 +885,11 @@ MonoBehaviour:
     type: 3}
   _playerCameraPrefab: {fileID: 7616779143748715643, guid: 9e3a0824e0ce6ee49af870a11efe2a3d,
     type: 3}
-  _aggressiveBurdPrefab: {fileID: 1637066925607362624, guid: 35b4309d921de97459bcbc7ccbc8d966,
-    type: 3}
-  _carPrefab: {fileID: 5066961233641141595, guid: f4deb85e11c91ea479774027be804021,
-    type: 3}
-  _clotheslinePrefab: {fileID: 6543055561499015604, guid: 8b8b717fc6d38fd4196f856827996425,
-    type: 3}
+  _aggressiveBurdPrefabs:
+  - {fileID: 1637066925607362624, guid: 35b4309d921de97459bcbc7ccbc8d966, type: 3}
+  _carPrefabs:
+  - {fileID: 5066961233641141595, guid: f4deb85e11c91ea479774027be804021, type: 3}
+  _clotheslinePrefabs:
+  - {fileID: 6543055561499015604, guid: 8b8b717fc6d38fd4196f856827996425, type: 3}
   _netPrefab: {fileID: 5917012183079924583, guid: b1fe09e495ac6734dbd206a74bb44d76,
     type: 3}

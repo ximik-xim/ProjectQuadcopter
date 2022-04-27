@@ -14,6 +14,7 @@ namespace Assets.Scripts
         {
             _prefab = prefab;
             _container = container;
+            _spawnPosition = container.transform.position;
         }
 
         public ActorFactory(A prefab, Container container, Vector3 spawnPosition)
