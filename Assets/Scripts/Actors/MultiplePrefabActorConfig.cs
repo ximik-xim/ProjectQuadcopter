@@ -3,18 +3,23 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class MultiplePrefabActorConfig<T> : Config where T : Actor
+    public class MultiplePrefabActorConfig<A> : Config where A : Actor
     {
-        [SerializeField] protected List<T> _prefabs;
+        [SerializeField] protected List<A> _prefabs;
 
-        public IEnumerable<T> Prefabs
+        private int _prefabIndex;
+
+        public A Prefab
         {
             get
             {
-                T[] prefabs = new T[_prefabs.Count];
-                _prefabs.CopyTo(prefabs);
-                return prefabs;
+                _prefabIndex = (_prefabIndex == _prefabs.Count) ? 0 : _prefabIndex;
+                A prefab = _prefabs[_prefabIndex];
+                _prefabIndex++;
+                return prefab;
             }
         }
+
+        public int PrefabsCount => _prefabs.Count;
     }
 }
