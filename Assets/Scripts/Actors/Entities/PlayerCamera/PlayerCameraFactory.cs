@@ -2,13 +2,13 @@
 
 namespace Assets.Scripts
 {
-    class PlayerCameraFactory : ActorFactory<PlayerCamera>
+    class PlayerCameraFactory : ActorFactory<PlayerCamera, PlayerCameraConfig>
     {
-        public PlayerCameraFactory(PlayerCamera prefab, Container container, Vector2 position) : base(prefab, container, position) { }
+        public PlayerCameraFactory(PlayerCameraConfig config, Container container, Vector2 position) : base(config, container, position) { }
 
         public override PlayerCamera GetCreated()
         {
-            return Object.Instantiate(_prefab, _spawnPosition, Quaternion.identity, _container.transform);
+            return Object.Instantiate(_config.Prefab, _spawnPosition, Quaternion.identity, _container.transform);
         }
     }
 }
