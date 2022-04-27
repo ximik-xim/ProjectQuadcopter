@@ -21,7 +21,7 @@ namespace Assets.Scripts
             _wayMatrix = wayMatrix;
             _entitySpawner = entitySpawner;
             _chunkContainer = ContainerService.GetCreatedContainer("Chunks", city.transform, _wayMatrix.Center);
-            ChunkFactory chunkFactory = new ChunkFactory(_chunkConfig, _chunkContainer, wayMatrix, SpawnChunk);
+            ChunkFactory chunkFactory = new ChunkFactory(_chunkConfig, _chunkContainer, wayMatrix, SpawnChunk, _entitySpawner);
             _chunksPool = new Pool<Chunk>(chunkFactory, _chunkContainer, _chunkConfig.PrefabsCount);
             GenerateStartableChunks(_startableChunksAmount);
         }
@@ -37,7 +37,7 @@ namespace Assets.Scripts
         public Chunk GetGeneratedChunk(Vector3 position)
         {
             Chunk spawnedChunk =  _chunksPool.Get(position);
-            spawnedChunk.SetWindows();
+            spawnedChunk.SetWindows(_entitySpawner);
             _lastSpawnedChunk = spawnedChunk;
             return spawnedChunk;
         }

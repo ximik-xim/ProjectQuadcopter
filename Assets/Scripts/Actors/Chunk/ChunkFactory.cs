@@ -5,12 +5,14 @@ namespace Assets.Scripts
     public class ChunkFactory : ActorFactory<Chunk, ChunkConfig>
     {
         private WayMatrix _wayMatrix;
-        SpawnMethod _spawnMethod;
+        private SpawnMethod _spawnMethod;
+        private EntitySpawner _entitySpawner;
 
-        public ChunkFactory(ChunkConfig config, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod) : base(config, container)
+        public ChunkFactory(ChunkConfig config, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod, EntitySpawner entitySpawner) : base(config, container)
         {
             _wayMatrix = wayMatrix;
             _spawnMethod = spawnMethod;
+            _entitySpawner = entitySpawner;
         }
 
         public override Chunk GetCreated()
