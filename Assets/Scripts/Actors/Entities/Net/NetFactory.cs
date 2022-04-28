@@ -14,7 +14,7 @@ namespace Assets.Scripts
             net.gameObject.AddComponent<Mover>();
             net.gameObject.AddComponent<Disappearer>();
             net.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
-            RadiusableDetector radiusDetector = net.AddReaction<RadiusableDetector>(new LeanOutWindowReaction()) as RadiusableDetector;
+            RadiusableDetector radiusDetector = net.AddReaction<RadiusableDetector>(new LeanOutWindowReaction());
             radiusDetector.SetRadius(5); // будем брать радиус из конфига
             radiusDetector.SetTarget(_quadcopter);
             return net;
