@@ -4,6 +4,6 @@ namespace Assets.Scripts
 {
     public interface ICollisionReactable
     {
-        public void OnTriggerEnter(Collider other);
+        public void TriggerEnter();
     }
 }

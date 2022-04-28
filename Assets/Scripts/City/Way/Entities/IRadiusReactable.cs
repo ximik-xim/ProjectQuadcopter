@@ -1,7 +1,9 @@
-﻿namespace Assets.Scripts
+﻿using UnityEngine;
+
+namespace Assets.Scripts
 {
     public interface IRadiusReactable
     {
-        public void OnRadiusEnter();
+        public void RadiusEnter();
     }
 }

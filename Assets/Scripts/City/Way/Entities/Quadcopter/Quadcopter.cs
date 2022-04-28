@@ -1,4 +1,7 @@
 ﻿namespace Assets.Scripts
 {
-    public class Quadcopter : Entity { }
+    public class Quadcopter : Entity
+    {
+        
+    }
 }

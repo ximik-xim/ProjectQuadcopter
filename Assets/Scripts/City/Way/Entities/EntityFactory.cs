@@ -1,4 +1,7 @@
-﻿namespace Assets.Scripts
+﻿using System;
+using UnityEngine;
+
+namespace Assets.Scripts
 {
     abstract class EntityFactory<E> : IFactory<E> where E : Entity
     {
@@ -13,6 +16,7 @@
             _container = container;
         }
 
+   
         public abstract E GetCreated();
     }
 }

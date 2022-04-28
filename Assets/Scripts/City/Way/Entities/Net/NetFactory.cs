@@ -15,11 +15,33 @@ namespace Assets.Scripts
         {
             Net net = Object.Instantiate(_prefab);
             RadiusableDetector radiusableDetector = net.GetComponent<RadiusableDetector>();
+            CollisionDetector collisionDetector = net.GetComponent<CollisionDetector>();
+            KnockedDownReaction knockedDownReaction = new KnockedDownReaction();
+            
             net.AddReaction(new LeanOutWindowReaction());
-            net.AddReaction(new KnockedDownReaction(_quadcopter));
-            radiusableDetector.SetTarget(_quadcopter);
-            radiusableDetector.OnRadiusEnter += net.OnRadiusEnter;
+            net.AddReaction(knockedDownReaction);
+            
+            //radiusableDetectorTarget.SetTarget(_quadcopter);
+            
+            collisionDetector.Detecting += GetParametrs;
+            collisionDetector.Detecting += delegate(GameObject o) { net.TriggerEnter(); };
+            radiusableDetector.Detecting += delegate(GameObject o) { net.RadiusEnter(); };
+            
+
             return net;
+            
+            void GetParametrs(GameObject gameObject)
+            {
+                
+                if (gameObject.TryGetComponent<Health>(out Health health))
+                {
+                    knockedDownReaction.SetParametrs(health);    
+                    return;
+                }
+                
+                Debug.Log("Ошибка, на компоненте нету ХП");
+            }
+            
         }
     }
 }

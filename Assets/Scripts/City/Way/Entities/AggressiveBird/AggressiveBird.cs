@@ -2,12 +2,10 @@
 
 namespace Assets.Scripts
 {
-    public class AggressiveBird : Reactable, ICollisionReactable
+    public class AggressiveBird : Reactable, ICollisionReactable,ILookReactable
     {
-        public void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out Quadcopter quadcopter))
-                TryGetReaction<KnockedDownReaction>().React();
-        }
+        public void TriggerEnter() => TryGetReaction<CausingDamage>().React();
+        public void LookEnter() => TryGetReaction<LookObstaclesReaction>().React();
+
     }
 }

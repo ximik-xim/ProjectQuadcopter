@@ -8,7 +8,28 @@ namespace Assets.Scripts
 
         public override Clothesline GetCreated()
         {
-            throw new System.NotImplementedException();
+            Clothesline clothesline = Object.Instantiate(_prefab);
+            CollisionDetector collisionDetector = clothesline.gameObject.AddComponent<CollisionDetector>();
+            KnockedDownReaction knockedDownReaction = new KnockedDownReaction();
+            
+            clothesline.AddReaction(knockedDownReaction);
+            
+            collisionDetector.Detecting += GetParametrs;
+            collisionDetector.Detecting += delegate(GameObject o) { clothesline.TriggerEnter(); };
+
+            return clothesline;
+            
+            void GetParametrs(GameObject gameObject)
+            {
+                
+                if (gameObject.TryGetComponent<Health>(out Health health))
+                {
+                    knockedDownReaction.SetParametrs(health);    
+                    return;
+                }
+                
+                Debug.Log("Ошибка, на компоненте нету ХП");
+            }
         }
     }
 }

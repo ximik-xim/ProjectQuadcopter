@@ -4,11 +4,9 @@ using UnityEditor;
 
 namespace Assets.Scripts
 {
-    public delegate void RadiusEnterHandler();
-
-    public class RadiusableDetector : MonoBehaviour
+    public class RadiusableDetectorTarget : MonoBehaviour
     {
-        public event RadiusEnterHandler OnRadiusEnter;
+        public event Action<GameObject> Detecting;
 
         [SerializeField] [Range(1, 10)] private float _radius;
 
@@ -26,7 +24,7 @@ namespace Assets.Scripts
         {
             if (IsTargetInRadius() && _isDetection)
             {
-                OnRadiusEnter?.Invoke();
+                Detecting?.Invoke(_target.gameObject);
                 _isDetection = false;
             }
 
@@ -43,16 +41,19 @@ namespace Assets.Scripts
         }
 
         private void OnDisable() => UpdateService.OnUpdate -= Detect;
-    }
 
-    //[CustomEditor(typeof(RadiusableDetector))]
-    //public class TargetDetectorEditor : Editor
-    //{
-    //    private void OnSceneGUI()
-    //    {
-    //        RadiusableDetector detector = target as RadiusableDetector;
-    //        Handles.color = Color.red;
-    //        Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
-    //   }
-    //}
+        private void OnDrawGizmos()
+        {
+            if (gameObject.activeSelf)
+            {
+                float distance = Vector3.Distance(transform.position, _target.gameObject.transform.position);
+                Vector3 valueOneDistance = transform.position / distance;
+                Vector3 directionTarget = transform.position - valueOneDistance * _radius;
+
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawLine(transform.position, directionTarget);
+            }
+        }
+
+    }
 }
