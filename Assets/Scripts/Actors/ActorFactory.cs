@@ -4,22 +4,22 @@ namespace Assets.Scripts
 {
     public abstract class ActorFactory<A, C> : IFactory<A> where A : Actor where C : Config
     {
-        protected C GuyConfig;
+        protected C _config;
         protected Container _container;
         protected Vector3 _spawnPosition;
 
-        public ActorFactory(C guyConfig) => GuyConfig = guyConfig;
+        public ActorFactory(C config) => _config = config;
 
-        public ActorFactory(C guyConfig, Container container)
+        public ActorFactory(C config, Container container)
         {
-            GuyConfig = guyConfig;
+            _config = config;
             _container = container;
             _spawnPosition = container.transform.position;
         }
 
-        public ActorFactory(C guyConfig, Container container, Vector3 spawnPosition)
+        public ActorFactory(C config, Container container, Vector3 spawnPosition)
         {
-            GuyConfig = guyConfig;
+            _config = config;
             _container = container;
             _spawnPosition = spawnPosition;
         }

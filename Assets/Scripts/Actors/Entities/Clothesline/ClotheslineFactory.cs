@@ -10,8 +10,8 @@ namespace Assets.Scripts
 
         public override Clothesline GetCreated()
         {
-            Clothesline clothesline = Object.Instantiate(GuyConfig.Prefab);
-            clothesline.gameObject.AddComponent<Mover>().SetSelfSpeed(GuyConfig.MoveSpeed);
+            Clothesline clothesline = Object.Instantiate(_config.Prefab);
+            clothesline.gameObject.AddComponent<Mover>().SetSelfSpeed(_config.MoveSpeed);
             clothesline.gameObject.AddComponent<Disappearer>();
             clothesline.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
             return clothesline;
