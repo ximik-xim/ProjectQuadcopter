@@ -3,7 +3,7 @@
 namespace Assets.Scripts
 {
     [CreateAssetMenu(menuName = "Config/Net", fileName = "New Net Config")]
-    public class NetConfig : MultiplePrefabActorConfig<Net>
+    public class NetGuyConfig : MultiplePrefabActorConfig<NetGuy>
     {
         [SerializeField] [Range(1, 10)] private float _moveSpeed;
         [SerializeField] [Range(1, 10)] private float _rangeDetector;

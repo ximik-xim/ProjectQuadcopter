@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1929482569649986765}
   - component: {fileID: 3655717833880763188}
   m_Layer: 0
-  m_Name: Net
+  m_Name: NetGuy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

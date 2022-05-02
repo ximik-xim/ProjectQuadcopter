@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8f1eeb6f3d8a29438351067a25733f8, type: 3}
-  m_Name: NetConfig
+  m_Name: NetGuyConfig
   m_EditorClassIdentifier: 
   _prefabs:
   - {fileID: 5917012183079924583, guid: b1fe09e495ac6734dbd206a74bb44d76, type: 3}

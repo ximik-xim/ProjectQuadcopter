@@ -23,7 +23,7 @@ namespace Assets.Scripts
             foreach (SpawnPoint spawnPoint in _spawnPoints)
             {
                 if (Random.Range(0, 100) > density) continue;
-                Net net = entitySpawner.NetPool.Get(spawnPoint.transform.position);
+                NetGuy netGuy = entitySpawner.NetPool.Get(spawnPoint.transform.position);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Assets.Scripts
 
         public override PlayerCamera GetCreated()
         {
-            return Object.Instantiate(_config.Prefab, _spawnPosition, Quaternion.identity, _container.transform);
+            return Object.Instantiate(GuyConfig.Prefab, _spawnPosition, Quaternion.identity, _container.transform);
         }
     }
 }

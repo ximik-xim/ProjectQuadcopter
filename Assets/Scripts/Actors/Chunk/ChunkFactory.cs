@@ -17,7 +17,7 @@ namespace Assets.Scripts
 
         public override Chunk GetCreated()
         {
-            Chunk chunk = Object.Instantiate(_config.Prefab, _container.transform);
+            Chunk chunk = Object.Instantiate(GuyConfig.Prefab, _container.transform);
             Disappearer disappearer = chunk.gameObject.AddComponent<Disappearer>();
             chunk.gameObject.AddComponent<Mover>();
             disappearer.OnDisappear += _spawnMethod;

@@ -14,14 +14,14 @@ namespace Assets.Scripts
 
         public override Quadcopter GetCreated()
         {
-            Quadcopter quadcopter = Object.Instantiate(_config.Prefab, _container.transform);
+            Quadcopter quadcopter = Object.Instantiate(GuyConfig.Prefab, _container.transform);
             SwipeController swipeController = quadcopter.gameObject.AddComponent<SwipeController>();
             Health health = quadcopter.gameObject.AddComponent<Health>();
             swipeController.SetMatrix(_wayMatrix);
             swipeController.SetStartPosition(1, 1);
-            swipeController.SetMotionDuration(_config.MotionDuration);
+            swipeController.SetMotionDuration(GuyConfig.MotionDuration);
             quadcopter.transform.position = _wayMatrix.GetPosition(swipeController.CurrentPositionX, swipeController.CurrentPositionY);
-            health.SetMaxHP(_config.HP);
+            health.SetMaxHP(GuyConfig.HP);
             
             return quadcopter;
         }

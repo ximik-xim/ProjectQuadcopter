@@ -10,11 +10,11 @@ namespace Assets.Scripts
 
         public override Car GetCreated()
         {
-            Car car = Object.Instantiate(_config.Prefab);
-            car.gameObject.AddComponent<Mover>().SetSelfSpeed(_config.MoveSpeed);
+            Car car = Object.Instantiate(GuyConfig.Prefab);
+            car.gameObject.AddComponent<Mover>().SetSelfSpeed(GuyConfig.MoveSpeed);
             car.gameObject.AddComponent<Disappearer>();
             car.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
-            car.AddReaction<VisibilityRangeDetector>(new LookObstaclesReaction()).SetRange(_config.VisibilDetector);
+            car.AddReaction<VisibilityRangeDetector>(new LookObstaclesReaction()).SetRange(GuyConfig.VisibilDetector);
             return car;
         }
     }
