@@ -16,7 +16,7 @@ namespace Assets.Scripts
             WindowLeanOuter windowLeanOuter = netGuy.gameObject.AddComponent<WindowLeanOuter>();
             netGuy.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
             RadiusableDetector radiusDetector = netGuy.AddReaction<RadiusableDetector>(new LeanOutWindowReaction(windowLeanOuter));
-            radiusDetector.SetRadius(25);
+            radiusDetector.SetRadius(_config.RangeDetector);
             radiusDetector.SetTarget(_quadcopter);
             return netGuy;
         }
