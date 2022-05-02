@@ -28,10 +28,10 @@ namespace Assets.Scripts
 
         private void GenerateStartableChunks(int amount)
         {
-            _lastSpawnedChunk = GetGeneratedChunk(_wayMatrix.Center);
+            _lastSpawnedChunk = _chunksPool.Get(_wayMatrix.Center);
 
             for (int i = -1; i < amount; i++)
-                GetGeneratedChunk(_lastSpawnedChunk.ConnectPosition);
+                _lastSpawnedChunk = _chunksPool.Get(_lastSpawnedChunk.ConnectPosition);
         }
 
         public Chunk GetGeneratedChunk(Vector3 position)
