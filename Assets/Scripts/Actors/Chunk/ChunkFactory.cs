@@ -4,16 +4,10 @@ namespace Assets.Scripts
 {
     public class ChunkFactory : ActorFactory<Chunk, ChunkConfig>
     {
-        private WayMatrix _wayMatrix;
+        private WayMatrix _wayMatrix = new WayMatrix();
         private SpawnMethod _spawnMethod;
-        private EntitySpawner _entitySpawner;
 
-        public ChunkFactory(ChunkConfig config, Container container, WayMatrix wayMatrix, SpawnMethod spawnMethod, EntitySpawner entitySpawner) : base(config, container)
-        {
-            _wayMatrix = wayMatrix;
-            _spawnMethod = spawnMethod;
-            _entitySpawner = entitySpawner;
-        }
+        public ChunkFactory(ChunkConfig config, Container container, SpawnMethod spawnMethod) : base(config, container) => _spawnMethod = spawnMethod;
 
         public override Chunk GetCreated()
         {
@@ -21,7 +15,7 @@ namespace Assets.Scripts
             Disappearer disappearer = chunk.gameObject.AddComponent<Disappearer>();
             chunk.gameObject.AddComponent<Mover>();
             disappearer.OnDisappear += _spawnMethod;
-            disappearer.SetDisappearPoint(new Vector3(_wayMatrix.Center.x, _wayMatrix.Center.y, _wayMatrix.Center.z - chunk.Size));
+            disappearer.SetDisappearPoint(_wayMatrix.GetPosition(MatrixPosition.Center) + Vector3.back * chunk.Size);
             return chunk;
         }
     }

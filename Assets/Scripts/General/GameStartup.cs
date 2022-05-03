@@ -6,7 +6,6 @@ namespace Assets.Scripts
     {
         [Header("Configurations")]
         [SerializeField] private City _city;
-        [SerializeField] private WayMatrix _wayMatrix;
         [SerializeField][Range(10, 100)] private float _startSpeed;
 
         private EntitySpawner _entitySpawner;
@@ -20,9 +19,8 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            _wayMatrix.Generate();
-            _entitySpawner.Init(_city, _wayMatrix);
-            _chunkGenerator.Init(_city, _wayMatrix, _entitySpawner);
+            _entitySpawner.Init(_city);
+            _chunkGenerator.Init(_city, _entitySpawner);
             SpeedService.SetStartSpeed(_startSpeed);
         }
     }

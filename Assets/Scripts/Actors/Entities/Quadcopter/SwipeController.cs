@@ -6,7 +6,7 @@ namespace Assets.Scripts
     public class SwipeController : MonoBehaviour
     {
         private float _motionDuration;
-        private WayMatrix _wayMatrix;
+        private WayMatrix _wayMatrix = new WayMatrix();
         private int _currentPositionX;
         private int _currentPositionY;
 
@@ -33,6 +33,7 @@ namespace Assets.Scripts
         {
             CurrentPositionX = x;
             CurrentPositionY = y;
+            transform.position = _wayMatrix.GetPosition(CurrentPositionX, CurrentPositionY);
         }
 
         private void UpdatePosition(int x, int y)

@@ -1,42 +1,104 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace Assets.Scripts
+public class WayMatrix
 {
-    [CreateAssetMenu(menuName = "Way Matrix", fileName = "New Way Matrix")]
-    public class WayMatrix : ScriptableObject
+    private const int _width = 3;
+    private const int _height = 3;
+    private const float _spacing = 4;
+
+    private Vector2[,] _matrix;
+
+    public int Width => _width;
+    public int Height => _height;
+    public float Spacing => _spacing;
+
+    public WayMatrix()
     {
-        [SerializeField] [Range(1, 9)] private int _width;
-        [SerializeField] [Range(1, 9)] private int _height;
-        [SerializeField] [Range(1, 10)] private float _spacing;
+        _matrix = new Vector2[Height, Width];
+        float xPositionValue = Spacing;
 
-        private Vector2[,] _matrix;
-
-        void OnValidate() => _width = (int)Mathf.Round(_width / 2) * 2 + 1;
-
-        public int Width => _width;
-        public int Height => _height;
-        public float Spacing => _spacing;
-        public Vector3 Center => _matrix[_width / 2, _height / 2];
-
-        public void Generate()
+        for (int x = 0; x < Height; x++)
         {
-            _matrix = new Vector2[Width, Height];
-            float xCurrentIndex = -Spacing;
-            float yCurrentIndex = Spacing;
+            float yPositionValue = -Spacing;
 
-            for (int x = 0; x < Width; x++)
+            for (int y = 0; y < Width; y++)
             {
-                for (int y = 0; y < Height; y++)
-                {
-                    _matrix[x, y] = new Vector2(xCurrentIndex, yCurrentIndex);
-                    yCurrentIndex -= Spacing;
-                }
-
-                xCurrentIndex += Spacing;
-                yCurrentIndex = Spacing;
+                _matrix[x, y] = new Vector2(yPositionValue, xPositionValue);
+                yPositionValue += Spacing;
             }
+
+            xPositionValue -= Spacing;
+        }
+    }
+
+    public void PrintMatrix()
+    {
+        string matrixOut = "\n";
+
+        for (int x = 0; x < Width; x++)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                matrixOut += "(" + _matrix[x, y].x + "," + _matrix[x, y].y + ")" + " ";
+            }
+
+            matrixOut += "\n";
         }
 
-        public Vector2 GetPosition(int x, int y) => _matrix[x, y];
+        Debug.Log(matrixOut);
     }
+
+    public Vector3 GetPosition(MatrixPosition position)
+    {
+        switch (position)
+        {
+            case MatrixPosition.UpLeft:
+                {
+                    return _matrix[0, 0];
+                }
+            case MatrixPosition.UpRight:
+                {
+                    return _matrix[0, Width - 1];
+                }
+            case MatrixPosition.Center:
+                {
+                    return _matrix[Height / 2, Width / 2];
+                }
+            case MatrixPosition.DownLeft:
+                {
+                    return _matrix[Height - 1, 0];
+                }
+            case MatrixPosition.DownRight:
+                {
+                    return _matrix[Height - 1, Width - 1];
+                }
+            default:
+                {
+                    goto case MatrixPosition.Center;
+                }
+        }
+    }
+
+    public Vector3 GetPosition(int x, int y) => _matrix[y, x];
+
+    public Vector3[] GetRowWithIndex(int rowIndex)
+    {
+        Vector3[] matrixRow = new Vector3[Width];
+
+        for (int i = 0; i < Width; i++)
+        {
+            matrixRow[i] = _matrix[rowIndex, i];
+        }
+
+        return matrixRow;
+    }
+}
+
+public enum MatrixPosition
+{
+    UpLeft,
+    UpRight,
+    Center,
+    DownLeft,
+    DownRight
 }
