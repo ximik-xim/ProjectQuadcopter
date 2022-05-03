@@ -7,43 +7,31 @@ namespace Assets.Scripts
     {
         private float _motionDuration;
         private WayMatrix _wayMatrix = new WayMatrix();
-        private int _currentPositionX;
-        private int _currentPositionY;
+        private Vector2Int _currentPosition;
 
-        public int CurrentPositionX
+        public Vector2Int CurrentPosition
         {
-            get => _currentPositionX;
+            get => _currentPosition;
 
-            private set => _currentPositionX = Mathf.Clamp(value, 0, _wayMatrix.Width - 1);
-        }
-        public int CurrentPositionY
-        {
-            get => _currentPositionY;
-
-            private set => _currentPositionY = Mathf.Clamp(value, 0, _wayMatrix.Height - 1);
+            private set => _currentPosition = new Vector2Int(Mathf.Clamp(value.x, 0, _wayMatrix.Width - 1), Mathf.Clamp(value.y, 0, _wayMatrix.Height - 1));
         }
 
         private void OnEnable() => SwipeHandler.OnSwipe += UpdatePosition;
 
-        public void SetMatrix(WayMatrix wayMatrix) => _wayMatrix = wayMatrix;
-
         public void SetMotionDuration(float motionDuration) => _motionDuration = motionDuration;
 
-        public void SetStartPosition(int x, int y)
+        public void SetStartPosition(MatrixPosition position)
         {
-            CurrentPositionX = x;
-            CurrentPositionY = y;
-            transform.position = _wayMatrix.GetPosition(CurrentPositionX, CurrentPositionY);
+            transform.position = _wayMatrix.GetPosition(position, out _currentPosition);
         }
 
-        private void UpdatePosition(int x, int y)
+        private void UpdatePosition(Vector2Int positionShift)
         {
-            CurrentPositionX += x;
-            CurrentPositionY -= y;
+            CurrentPosition = new Vector2Int(CurrentPosition.x + positionShift.x, CurrentPosition.y - positionShift.y);
             Move();
         }
 
-        private void Move() => transform.DOMove(_wayMatrix.GetPosition(CurrentPositionX, CurrentPositionY), _motionDuration);
+        private void Move() => transform.DOMove(_wayMatrix.GetCoordinatePosistion(CurrentPosition), _motionDuration);
 
         private void OnDisable() => SwipeHandler.OnSwipe -= UpdatePosition;
     }

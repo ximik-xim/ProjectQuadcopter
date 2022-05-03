@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class SwipeHandler : MonoBehaviour
     {
-        public static event Action<int, int> OnSwipe;
+        public static event Action<Vector2Int> OnSwipe;
 
         [SerializeField] [Range(0, 1000)] private int _deadZone;
 
@@ -30,15 +30,16 @@ namespace Assets.Scripts
 
             if (swipeDirection.magnitude >= _deadZone)
             {
-                CalculateDirection(swipeDirection.normalized, out int x, out int y);
-                OnSwipe?.Invoke(x, y);
+                OnSwipe?.Invoke(CalculateDirection(swipeDirection.normalized));
             }
         }
 
-        private void CalculateDirection(Vector2 normalizedSwipeDirection, out int x, out int y)
+        private Vector2Int CalculateDirection(Vector2 normalizedSwipeDirection)
         {
-            x = Mathf.RoundToInt(normalizedSwipeDirection.x - 0.2f * Mathf.Sign(normalizedSwipeDirection.x));
-            y = Mathf.RoundToInt(normalizedSwipeDirection.y - 0.2f * Mathf.Sign(normalizedSwipeDirection.y));
+            int x = Mathf.RoundToInt(normalizedSwipeDirection.x - 0.2f * Mathf.Sign(normalizedSwipeDirection.x));
+            int y = Mathf.RoundToInt(normalizedSwipeDirection.y - 0.2f * Mathf.Sign(normalizedSwipeDirection.y));
+
+            return new Vector2Int(x, y);
         }
 
         private void OnDisable() => EnhancedTouchSupport.Disable();
