@@ -1,28 +1,25 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Health:MonoBehaviour
 {
-    public event Action Died;
+    public event Action OnDie;
 
     private int _maxHP;
 
-    private int _HP;
+    private int _hp;
     
     public int HP
     {
-        get { return _HP;}
+        get { return _hp;}
         
         private set
         {
-            _HP += value;
+            _hp += value;
 
-            if (_HP == 0)
+            if (_hp == 0)
             {
-                Died?.Invoke();
+                OnDie?.Invoke();
             }
         }
     }
@@ -42,7 +39,7 @@ public class Health:MonoBehaviour
         Debug.Log("Вы были убиты");
     }
 
-    public void TakingDamage()
+    public void TakeDamage()
     {
         if (HP > 0)
         {
