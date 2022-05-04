@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
 
-public class VisibilityRangeDetector : MonoBehaviour, IDetector
+public class FrontDetector : MonoBehaviour, IDetector
 {
     public event Action OnDetect;
 

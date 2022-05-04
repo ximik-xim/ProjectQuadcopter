@@ -38,7 +38,6 @@ namespace Assets.Scripts
         {
             int x = Mathf.RoundToInt(normalizedSwipeDirection.x - 0.2f * Mathf.Sign(normalizedSwipeDirection.x));
             int y = Mathf.RoundToInt(normalizedSwipeDirection.y - 0.2f * Mathf.Sign(normalizedSwipeDirection.y));
-
             return new Vector2Int(x, y);
         }
 

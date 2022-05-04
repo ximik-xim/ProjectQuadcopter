@@ -1,7 +1,7 @@
 using Assets.Scripts;
 using UnityEngine;
 
-public class LookObstaclesReaction : IReaction
+public class CryReaction : IReaction
 {
     public void React()
     {

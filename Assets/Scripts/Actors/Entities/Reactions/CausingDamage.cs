@@ -2,10 +2,10 @@ namespace Assets.Scripts
 {
     public class CausingDamage : IReaction
     {
-        private Health _health;
+        private Health _targetHealth;
 
-        public CausingDamage(Quadcopter quadcopter) => _health = quadcopter.gameObject.GetComponent<Health>();
+        public CausingDamage(Health targetHealth) => _targetHealth = targetHealth;
 
-        public void React() => _health.TakeDamage();
+        public void React() => _targetHealth.TakeDamage();
     }
 }

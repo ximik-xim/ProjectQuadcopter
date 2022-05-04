@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class WayMatrix
@@ -15,11 +14,6 @@ public class WayMatrix
 
     public WayMatrix()
     {
-        if(Width != 3)
-        {
-            throw new Exception("BLAYT SHIRINA MATRIZZI NE RAVNA 3!!!!");
-        }
-
         _matrix = new Vector2[Height, Width];
         float xPositionValue = Spacing;
 
@@ -35,8 +29,6 @@ public class WayMatrix
 
             xPositionValue -= Spacing;
         }
-
-        //PrintMatrix();
     }
 
     public void PrintMatrix()
@@ -128,10 +120,7 @@ public class WayMatrix
         }
     }
 
-    public Vector3 GetCoordinatePosistion(Vector2Int position)
-    {
-        return _matrix[ConvertCoordinates(position).x, ConvertCoordinates(position).y];
-    }
+    public Vector3 GetCoordinatePosistion(Vector2Int position) => _matrix[ConvertCoordinates(position).x, ConvertCoordinates(position).y];
 
     public Vector3[] GetRowWithIndex(int rowIndex)
     {
@@ -145,10 +134,7 @@ public class WayMatrix
         return matrixRow;
     }
 
-    private Vector2Int ConvertCoordinates(Vector2Int position)
-    {
-        return new Vector2Int(position.y, position.x);
-    }
+    private Vector2Int ConvertCoordinates(Vector2Int position) => new Vector2Int(position.y, position.x);
 }
 
 public enum MatrixPosition
