@@ -11,10 +11,10 @@ namespace Assets.Scripts
         public override AggressiveBird GetCreated()
         {
             AggressiveBird aggressiveBird = Object.Instantiate(_config.Prefab);
-            aggressiveBird.gameObject.AddComponent<Mover>().SetSelfSpeed(_config.MoveSpeed);
+            aggressiveBird.gameObject.AddComponent<Mover>().SetSelfSpeed(_config.SelfSpeed);
             aggressiveBird.gameObject.AddComponent<Disappearer>();
             aggressiveBird.AddReaction<CollisionDetector>(new CausingDamage(_target.GetComponent<Health>()));
-            aggressiveBird.AddReaction<FrontDetector>(new CryReaction()).SetRange(_config.VisibilDetector);
+            aggressiveBird.AddReaction<FrontDetector>(new CryReaction()).SetDetectionDistance(_config.DetectionDistance);
             return aggressiveBird;
         }
     }
