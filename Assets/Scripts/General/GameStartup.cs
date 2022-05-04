@@ -22,6 +22,7 @@ namespace Assets.Scripts
             _entitySpawner.Init(_city);
             _chunkGenerator.Init(_city, _entitySpawner);
             SpeedService.SetStartSpeed(_startSpeed);
+            _entitySpawner.AggressiveBirdPool.Get(new WayMatrix().GetPosition(MatrixPosition.Center) + Vector3.forward * 100);
         }
     }
 }

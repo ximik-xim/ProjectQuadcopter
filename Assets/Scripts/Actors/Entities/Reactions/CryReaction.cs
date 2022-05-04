@@ -5,6 +5,6 @@ public class CryReaction : IReaction
 {
     public void React()
     {
-        Debug.Log("Увидели препятствие перед собой");
+        Debug.Log("AAA");
     }
 }
