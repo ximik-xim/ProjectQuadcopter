@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 1414658731}
   - component: {fileID: 1414658732}
   m_Layer: 0
-  m_Name: '[--------------------CITY------------------------------------------'
+  m_Name: '[-------------CITY------------------------------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 1457702395}
   - component: {fileID: 1457702396}
   m_Layer: 0
-  m_Name: '[------------------GENERAL----------------------------------------'
+  m_Name: '[-----------GENERAL----------------------------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 1703405854}
   - component: {fileID: 1703405853}
   m_Layer: 5
-  m_Name: '[---------------------UI--------------------------------------------'
+  m_Name: '[--------------UI--------------------------------------------'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
