@@ -6,7 +6,9 @@ namespace Assets.Scripts
     public class QuadcopterConfig : ActorConfig<Quadcopter> 
     {
         [SerializeField][Range(0, 1)] private float _motionDuration;
+        [SerializeField] [Range(1, 5)] private int _HP;
 
+        public int HP { get =>_HP; }
         public float MotionDuration => _motionDuration;
     }
 }

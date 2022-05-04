@@ -1,17 +1,11 @@
-﻿using UnityEngine;
-
-namespace Assets.Scripts
+﻿namespace Assets.Scripts
 {
     public class LeanOutWindowReaction : IReaction
     {
-        public LeanOutWindowReaction()
-        {
+        private WindowLeanOuter _windowLeanOuter;
 
-        }
+        public LeanOutWindowReaction(WindowLeanOuter windowLeanOuter) => _windowLeanOuter = windowLeanOuter;
 
-        public void React()
-        {
-            Debug.Log("Lean Out The Window");
-        }
+        public void React() => _windowLeanOuter.LeanOutWindow();
     }
 }

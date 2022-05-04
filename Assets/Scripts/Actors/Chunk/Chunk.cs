@@ -18,15 +18,11 @@ namespace Assets.Scripts
 
         public void SetWindows(EntitySpawner entitySpawner)
         {
-            float density = 10;
-
             foreach (SpawnPoint spawnPoint in _spawnPoints)
             {
-                if (Random.Range(0, 100) > density) continue;
-                Net net = entitySpawner.NetPool.Get(spawnPoint.transform.position);
-                net.transform.localScale = spawnPoint.transform.localScale;
+                if (Random.Range(0, 100) > entitySpawner.NetGuyDensity) continue;
+                entitySpawner.NetGuyPool.Get(spawnPoint.transform.position);
             }
         }
-        
     }
 }

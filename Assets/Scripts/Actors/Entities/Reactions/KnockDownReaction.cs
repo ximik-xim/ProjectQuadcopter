@@ -4,16 +4,21 @@ namespace Assets.Scripts
 {
     public class KnockedDownReaction : IReaction
     {
-        Quadcopter _quadcopter;
+        private Health Health;
 
         public KnockedDownReaction(Quadcopter quadcopter)
         {
-            _quadcopter = quadcopter;
+            Health = quadcopter.gameObject.GetComponent<Health>();
         }
 
+        public void SetParametrs(Health health)
+        {
+            Health = health;
+        }
+        
         public void React()
         {
-            Debug.Log("Knocked Down");
+            Health.Kill();
         }
     }
 }

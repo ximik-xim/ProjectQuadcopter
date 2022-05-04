@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: -1471220750757077440, guid: d209540c019e14b40ac489e8239f83e5, type: 3}
   - {fileID: 7946600438839257562, guid: d32b812a8f915fd4a84c41e46755c1a0, type: 3}
   - {fileID: -1925305964513043887, guid: 01fe2093536242a42986ac4722490f21, type: 3}
+  _moveSpeed: 1

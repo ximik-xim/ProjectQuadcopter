@@ -4,16 +4,16 @@ namespace Assets.Scripts
 {
     class ClotheslineFactory : ActorFactory<Clothesline, ClotheslineConfig>
     {
-        private Quadcopter _quadcopter;
+        private Entity _target;
 
-        public ClotheslineFactory(ClotheslineConfig config, Quadcopter quadcopter) : base(config) => _quadcopter = quadcopter;
+        public ClotheslineFactory(ClotheslineConfig config, Entity target) : base(config) => _target = target;
 
         public override Clothesline GetCreated()
         {
             Clothesline clothesline = Object.Instantiate(_config.Prefab);
             clothesline.gameObject.AddComponent<Mover>();
             clothesline.gameObject.AddComponent<Disappearer>();
-            clothesline.AddReaction<CollisionDetector>(new KnockedDownReaction(_quadcopter));
+            clothesline.AddReaction<CollisionDetector>(new CausingDamage(_target.GetComponent<Health>()));
             return clothesline;
         }
     }

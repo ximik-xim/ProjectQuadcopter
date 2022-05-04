@@ -10,15 +10,15 @@ namespace Assets.Scripts
 
         private float _radius;
 
-        private Quadcopter _target;
+        private Entity _target;
         private bool _isDetection = true;
 
         public float Radius => _radius;
-        public Quadcopter Target => _target;
+        public Entity Target => _target;
 
         private void OnEnable() => UpdateService.OnUpdate += Detect;
 
-        public void SetTarget(Quadcopter target) => _target = target;
+        public void SetTarget(Entity entity) => _target = entity;
 
         public void SetRadius(float radius) => _radius = radius;
 
@@ -45,14 +45,14 @@ namespace Assets.Scripts
         private void OnDisable() => UpdateService.OnUpdate -= Detect;
     }
 
-    [CustomEditor(typeof(RadiusableDetector))]
-    public class TargetDetectorEditor : Editor
-    {
-        private void OnSceneGUI()
-        {
-            RadiusableDetector detector = target as RadiusableDetector;
-            Handles.color = Color.red;
-            Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
-        }
-    }
+    //[CustomEditor(typeof(RadiusableDetector))]
+    //public class TargetDetectorEditor : Editor
+    //{
+    //    private void OnSceneGUI()
+    //    {
+    //        RadiusableDetector detector = target as RadiusableDetector;
+    //        Handles.color = Color.red;
+    //        Handles.DrawWireArc(detector.transform.position, Vector3.up, Vector3.forward, 360, detector.Radius);
+    //    }
+    //}
 }

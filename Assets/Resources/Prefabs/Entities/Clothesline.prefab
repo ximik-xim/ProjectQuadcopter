@@ -121,7 +121,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1389865029075994988}
+  - component: {fileID: 686013227556913869}
   - component: {fileID: 6543055561499015604}
+  - component: {fileID: -1911254579557499540}
   m_Layer: 0
   m_Name: Clothesline
   m_TagString: Untagged
@@ -144,6 +146,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &686013227556913869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276177137691015889}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0.75}
 --- !u!114 &6543055561499015604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +171,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ae82a1c3becaff47a952f2c5226b673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-1911254579557499540
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8276177137691015889}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 430cc81455ff30e4da9a0b2700953143, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
