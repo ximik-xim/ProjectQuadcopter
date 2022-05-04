@@ -13,17 +13,21 @@ namespace Assets.Scripts
         {
             get => _currentPosition;
 
-            private set => _currentPosition = new Vector2Int(Mathf.Clamp(value.x, 0, _wayMatrix.Width - 1), Mathf.Clamp(value.y, 0, _wayMatrix.Height - 1));
+            private set
+            {
+                _currentPosition = new Vector2Int
+                (
+                    Mathf.Clamp(value.x, 0, _wayMatrix.Width - 1),
+                    Mathf.Clamp(value.y, 0, _wayMatrix.Height - 1)
+                );
+            }
         }
 
         private void OnEnable() => SwipeHandler.OnSwipe += UpdatePosition;
 
         public void SetMotionDuration(float motionDuration) => _motionDuration = motionDuration;
 
-        public void SetStartPosition(MatrixPosition position)
-        {
-            transform.position = _wayMatrix.GetPosition(position, out _currentPosition);
-        }
+        public void SetStartPosition(MatrixPosition position) => transform.position = _wayMatrix.GetPosition(position, out _currentPosition);
 
         private void UpdatePosition(Vector2Int positionShift)
         {
