@@ -7,7 +7,7 @@ namespace Assets.Scripts
     public class EntitySpawner : MonoBehaviour
     {
         private WayMatrix _wayMatrix = new WayMatrix();
-        private Dictionary<Type, IPool> _pools;
+        private Dictionary<Type, IPool> _pools = new Dictionary<Type, IPool>();
 
         [Header("Configurations")]
         [SerializeField] private QuadcopterConfig _quadcopterConfig;
