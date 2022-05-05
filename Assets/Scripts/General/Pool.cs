@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class Pool<T> where T : MonoBehaviour
+    public class Pool<T> : IPool where T : MonoBehaviour
     {
         private IFactory<T> _factory;
         private List<T> _elements;

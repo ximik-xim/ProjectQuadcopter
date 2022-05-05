@@ -16,12 +16,12 @@ namespace Assets.Scripts
             _spawnPoints.AddRange(GetComponentsInChildren<SpawnPoint>());
         }
 
-        public void SetWindows(EntitySpawner entitySpawner)
+        public void CollectWindows(Pool<NetGuy> netGuyPool, int density)
         {
             foreach (SpawnPoint spawnPoint in _spawnPoints)
             {
-                if (Random.Range(0, 100) > entitySpawner.NetGuyDensity) continue;
-                entitySpawner.NetGuyPool.Get(spawnPoint.transform.position);
+                if (Random.Range(0, 100) > density) continue;
+                netGuyPool.Get(spawnPoint.transform.position);
             }
         }
     }
