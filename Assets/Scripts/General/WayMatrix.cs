@@ -120,7 +120,7 @@ public class WayMatrix
         }
     }
 
-    public Vector3 GetCoordinatePosistion(Vector2Int position) => _matrix[ConvertCoordinates(position).x, ConvertCoordinates(position).y];
+    public Vector3 GetPositionByArrayCoordinates(Vector2Int position) => _matrix[ConvertCoordinates(position).x, ConvertCoordinates(position).y];
 
     public Vector3[] GetRowWithIndex(int rowIndex)
     {

@@ -35,7 +35,7 @@ namespace Assets.Scripts
             Move();
         }
 
-        private void Move() => transform.DOMove(_wayMatrix.GetCoordinatePosistion(CurrentPosition), _motionDuration);
+        private void Move() => transform.DOMove(_wayMatrix.GetPositionByArrayCoordinates(CurrentPosition), _motionDuration);
 
         private void OnDisable() => SwipeHandler.OnSwipe -= UpdatePosition;
     }
