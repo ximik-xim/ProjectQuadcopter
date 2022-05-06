@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,10 +42,48 @@ namespace Assets.Scripts
             _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitieContainer, 10);
             _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitieContainer, 10);
             _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitieContainer, 10);
+            StartCoroutine(SpawnEntities());
         }
 
         public Pool<P> GetPool<P>() where P : Actor => _pools[typeof(P)] as Pool<P>;
 
         private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
+
+        private IEnumerator SpawnEntities()
+        {
+            while (true)
+            {
+                SpawnBirds();
+                yield return new WaitForSeconds(1);
+            }
+        }
+
+        private void SpawnBirds()
+        {
+            var x = _wayMatrix.GetRowWithIndex(0);
+            foreach (var y in x)
+            {
+                if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDencity) continue;
+                GetPool<AggressiveBird>().Get(y + new Vector3(0, 0, 100));
+            }
+        }
+
+        private void SpawnBirdsMultiplieRows(int rows)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                var x = _wayMatrix.GetRowWithIndex(i);
+                foreach (var y in x)
+                {
+                    if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDencity) continue;
+                    GetPool<AggressiveBird>().Get(y + new Vector3(0, 0, 100));
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
     }
 }
