@@ -43,7 +43,7 @@ namespace Assets.Scripts
             _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitieContainer, 10);
         }
 
-        public Pool<P> GetPool<P>() where P : Actor => _pools[typeof(P)] as Pool<P>;
+        public Pool<T> GetPool<T>() where T : Actor => _pools[typeof(T)] as Pool<T>;
 
         private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
     }
