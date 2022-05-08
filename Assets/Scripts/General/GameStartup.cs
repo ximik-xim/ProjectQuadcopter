@@ -22,9 +22,6 @@ namespace Assets.Scripts
             SpeedService.SetStartSpeed(_startSpeed);
             _entitySpawner.Init(_city);
             _chunkGenerator.Init(_city, _entitySpawner);
-
-            _entitySpawner.EnableCarTraffic();
-            _entitySpawner.EnableAggressiveBirds();
         }
     }
 }
