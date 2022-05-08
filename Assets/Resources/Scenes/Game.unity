@@ -896,6 +896,6 @@ MonoBehaviour:
   _clotheslineConfig: {fileID: 11400000, guid: 65204631fb977c449bcd81a425fcb227, type: 2}
   _netGuyConfig: {fileID: 11400000, guid: 0380147e93dde074490ad04b07cd84a6, type: 2}
   _aggressiveBirdDensity: 50
-  _carDensity: 90
+  _carDensity: 30
   _clothesLineDensity: 15
   _netGuyDensity: 10
