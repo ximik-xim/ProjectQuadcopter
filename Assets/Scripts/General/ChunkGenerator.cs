@@ -36,7 +36,7 @@ namespace Assets.Scripts
         public Chunk GetGeneratedChunk(Vector3 position)
         {
             Chunk spawnedChunk =  _chunksPool.Get(position);
-            spawnedChunk.CollectWindows(_entitySpawner.GetPool<NetGuy>(), _entitySpawner.NetGuyDensity);
+            spawnedChunk.SettleWindows(_entitySpawner.GetPool<NetGuy>(), _entitySpawner.NetGuyDensity);
             _lastSpawnedChunk = spawnedChunk;
             return spawnedChunk;
         }
