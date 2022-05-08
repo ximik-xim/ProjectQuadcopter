@@ -19,9 +19,9 @@ namespace Assets.Scripts
 
         private void Start()
         {
+            SpeedService.SetStartSpeed(_startSpeed);
             _entitySpawner.Init(_city);
             _chunkGenerator.Init(_city, _entitySpawner);
-            SpeedService.SetStartSpeed(_startSpeed);
         }
     }
 }

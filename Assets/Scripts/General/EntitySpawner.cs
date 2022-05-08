@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts
 {
@@ -37,12 +39,38 @@ namespace Assets.Scripts
 
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterConfig, EntitiesContainer));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraConfig, EntitiesContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
+            _pools[typeof(AggressiveBird)] = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdConfig, quadcopter), EntitieContainer, 10);
+            _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitieContainer, 10);
+            _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitieContainer, 10);
+            _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitieContainer, 10);
 
-            _pools[typeof(AggressiveBird)] = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBirdConfig, quadcopter), EntitiesContainer, 10);
-            _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitiesContainer, 10);
-            _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitiesContainer, 10);
-            _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitiesContainer, 10);
-            StartCoroutine(SpawnEntities());
+            StartCarTraffic();
+        }
+
+        IEnumerator CarSpawnRoutine(int line)
+        {
+            float horizon = 200f;
+            float startSpeed = SpeedService.Speed;
+
+            while (true)
+            {
+                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, _wayMatrix.Height - 1));
+
+                if (_carDensity > Random.Range(0, 100))
+                {
+                    GetPool<Car>().Get(position + Vector3.forward * horizon);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.15f * startSpeed / SpeedService.Speed, 0.5f * startSpeed / SpeedService.Speed));
+            }
+        }
+
+        private void StartCarTraffic()
+        {
+            for (int i = 0; i < _wayMatrix.Width; i++)
+            {
+                StartCoroutine(CarSpawnRoutine(i));
+            }
         }
 
         public Pool<T> GetPool<T>() where T : Actor => _pools[typeof(T)] as Pool<T>;
