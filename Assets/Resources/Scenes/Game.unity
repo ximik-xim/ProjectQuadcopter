@@ -890,12 +890,12 @@ MonoBehaviour:
   _quadcopterConfig: {fileID: 11400000, guid: f9284fa7e5cd0d047a91d4e63761eea8, type: 2}
   _playerCameraConfig: {fileID: 11400000, guid: 92959b057bfcf4540a00479b2bd1e8e7,
     type: 2}
-  _aggressiveBurdConfig: {fileID: 11400000, guid: d61d9b9e67103bc4887cc29c8dad0231,
+  _aggressiveBirdConfig: {fileID: 11400000, guid: d61d9b9e67103bc4887cc29c8dad0231,
     type: 2}
   _carConfig: {fileID: 11400000, guid: 00e9123255ab195478a1979a8421fbda, type: 2}
   _clotheslineConfig: {fileID: 11400000, guid: 65204631fb977c449bcd81a425fcb227, type: 2}
   _netGuyConfig: {fileID: 11400000, guid: 0380147e93dde074490ad04b07cd84a6, type: 2}
   _aggressiveBirdDensity: 50
-  _carDensity: 90
+  _carDensity: 30
   _clothesLineDensity: 15
   _netGuyDensity: 10
