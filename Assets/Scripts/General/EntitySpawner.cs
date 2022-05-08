@@ -66,6 +66,24 @@ namespace Assets.Scripts
             }
         }
 
+        private IEnumerator SpawnEntities(int line)
+        {
+            float horizon = 200f;
+            float startSpeed = SpeedService.Speed;
+
+            while (true)
+            {
+                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, 0));
+
+                if (_aggressiveBirdDensity > Random.Range(0, 100))
+                {
+                    GetPool<AggressiveBird>().Get(position + Vector3.forward * horizon);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.15f * startSpeed / SpeedService.Speed, 0.5f * startSpeed / SpeedService.Speed));
+            }
+        }
+
         private void StartCarTraffic()
         {
             for (int i = 0; i < _wayMatrix.Width; i++)
@@ -85,34 +103,6 @@ namespace Assets.Scripts
         public Pool<T> GetPool<T>() where T : Actor => _pools[typeof(T)] as Pool<T>;
 
         private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
-
-        private IEnumerator SpawnEntities(int line)
-        {
-            float horizon = 200f;
-            float startSpeed = SpeedService.Speed;
-
-            while (true)
-            {
-                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, 0));
-
-                if (_aggressiveBirdDensity > Random.Range(0, 100))
-                {
-                    GetPool<AggressiveBird>().Get(position + Vector3.forward * horizon);
-                }
-
-                yield return new WaitForSeconds(Random.Range(0.15f * startSpeed / SpeedService.Speed, 0.5f * startSpeed / SpeedService.Speed));
-            }
-        }
-
-        private void SpawnBirds()
-        {
-            Vector3[] cells = _wayMatrix.GetRowByIndex(0);
-            foreach (var cell in cells)
-            {
-                if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDensity) continue;
-                GetPool<AggressiveBird>().Get(cell + new Vector3(0, 0, 100));
-            }
-        }
 
         private void OnDisable()
         {
