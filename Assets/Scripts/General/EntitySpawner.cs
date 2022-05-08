@@ -25,6 +25,9 @@ namespace Assets.Scripts
         [SerializeField][Range(0, 100)] private int _clothesLineDensity;
         [SerializeField][Range(0, 100)] private int _netGuyDensity;
 
+        [Header("BirdRows")]
+        [SerializeField][Range(1, 4)] private int _birdsRows;
+
         public int AggressiveBirdDensity => _aggressiveBirdDensity;
         public int CarDensity => _carDensity;
         public int ClotheslineDensity => _clothesLineDensity;
@@ -65,14 +68,14 @@ namespace Assets.Scripts
             }
         }
 
-        private IEnumerator SpawnEntities(int line)
+        private IEnumerator SpawnBirds(int line, int row)
         {
             float horizon = 200f;
             float startSpeed = SpeedService.Speed;
 
             while (true)
             {
-                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, 0));
+                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, row));
 
                 if (_aggressiveBirdDensity > Random.Range(0, 100))
                 {
@@ -93,9 +96,12 @@ namespace Assets.Scripts
 
         private void StartBirdsSpawning()
         {
-            for (int i = 0; i < _wayMatrix.Width; i++)
-            {
-                StartCoroutine(SpawnEntities(i));
+            for (int row = _birdsRows-1; row >= 0; row--) {
+
+                for (int i = 0; i < _wayMatrix.Width; i++)
+                {
+                    StartCoroutine(SpawnBirds(i, row));
+                }
             }
         }
 
