@@ -45,7 +45,7 @@ namespace Assets.Scripts
             _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitiesContainer, 10);
 
             StartCarTraffic();
-            StartCoroutine(SpawnEntities());
+            StartBirdsSpawning();
         }
 
         IEnumerator CarSpawnRoutine(int line)
@@ -74,16 +74,33 @@ namespace Assets.Scripts
             }
         }
 
+        private void StartBirdsSpawning()
+        {
+            for (int i = 0; i < _wayMatrix.Width; i++)
+            {
+                StartCoroutine(SpawnEntities(i));
+            }
+        }
+
         public Pool<T> GetPool<T>() where T : Actor => _pools[typeof(T)] as Pool<T>;
 
         private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
 
-        private IEnumerator SpawnEntities()
+        private IEnumerator SpawnEntities(int line)
         {
+            float horizon = 200f;
+            float startSpeed = SpeedService.Speed;
+
             while (true)
             {
-                SpawnBirds();
-                yield return new WaitForSeconds(1);
+                Vector3 position = _wayMatrix.GetPositionByArrayCoordinates(new Vector2Int(line, 0));
+
+                if (_aggressiveBirdDensity > Random.Range(0, 100))
+                {
+                    GetPool<AggressiveBird>().Get(position + Vector3.forward * horizon);
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.15f * startSpeed / SpeedService.Speed, 0.5f * startSpeed / SpeedService.Speed));
             }
         }
 
@@ -94,19 +111,6 @@ namespace Assets.Scripts
             {
                 if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDensity) continue;
                 GetPool<AggressiveBird>().Get(cell + new Vector3(0, 0, 100));
-            }
-        }
-
-        private void SpawnBirdsMultiplieRows(int rows)
-        {
-            for (int row = 0; row < rows; row++)
-            {
-                Vector3[] cells = _wayMatrix.GetRowByIndex(row);
-                foreach (var cell in cells)
-                {
-                    if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDensity) continue;
-                    GetPool<AggressiveBird>().Get(cell + new Vector3(0, 0, 100));
-                }
             }
         }
 
