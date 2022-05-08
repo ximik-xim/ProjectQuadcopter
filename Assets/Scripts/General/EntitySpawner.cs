@@ -39,12 +39,13 @@ namespace Assets.Scripts
 
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterConfig, EntitiesContainer));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraConfig, EntitiesContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
-            _pools[typeof(AggressiveBird)] = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBurdConfig, quadcopter), EntitieContainer, 10);
-            _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitieContainer, 10);
-            _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitieContainer, 10);
-            _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitieContainer, 10);
+            _pools[typeof(AggressiveBird)] = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBirdConfig, quadcopter), EntitiesContainer, 10);
+            _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitiesContainer, 10);
+            _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitiesContainer, 10);
+            _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitiesContainer, 10);
 
             StartCarTraffic();
+            StartCoroutine(SpawnEntities());
         }
 
         IEnumerator CarSpawnRoutine(int line)
@@ -88,7 +89,7 @@ namespace Assets.Scripts
 
         private void SpawnBirds()
         {
-            Vector3[] cells = _wayMatrix.GetRowWithIndex(0);
+            Vector3[] cells = _wayMatrix.GetRowByIndex(0);
             foreach (var cell in cells)
             {
                 if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDensity) continue;
@@ -100,7 +101,7 @@ namespace Assets.Scripts
         {
             for (int row = 0; row < rows; row++)
             {
-                Vector3[] cells = _wayMatrix.GetRowWithIndex(row);
+                Vector3[] cells = _wayMatrix.GetRowByIndex(row);
                 foreach (var cell in cells)
                 {
                     if (UnityEngine.Random.Range(0, 100) > AggressiveBirdDensity) continue;
