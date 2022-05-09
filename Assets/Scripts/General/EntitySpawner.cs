@@ -41,13 +41,11 @@ namespace Assets.Scripts
 
             Quadcopter quadcopter = GetCreatedEntity(new QuadcopterFactory(_quadcopterConfig, EntitiesContainer));
             GetCreatedEntity(new PlayerCameraFactory(_playerCameraConfig, EntitiesContainer, _wayMatrix.GetPosition(MatrixPosition.Center)));
+
             _pools[typeof(AggressiveBird)] = new Pool<AggressiveBird>(new AggressiveBirdFactory(_aggressiveBirdConfig, quadcopter), EntitiesContainer, 10);
             _pools[typeof(Car)] = new Pool<Car>(new CarFactory(_carConfig, quadcopter), EntitiesContainer, 10);
             _pools[typeof(Clothesline)] = new Pool<Clothesline>(new ClotheslineFactory(_clotheslineConfig, quadcopter), EntitiesContainer, 10);
             _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitiesContainer, 10);
-
-            StartCarTraffic();
-            StartBirdsSpawning();
         }
 
         IEnumerator CarSpawnRoutine(int line)
@@ -68,7 +66,7 @@ namespace Assets.Scripts
             }
         }
 
-        private IEnumerator SpawnBirds(int line, int row)
+        private IEnumerator AggressiveBirdSpawnRoutine(int line, int row)
         {
             float horizon = 200f;
             float startSpeed = SpeedService.Speed;
@@ -86,7 +84,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void StartCarTraffic()
+        public void EnableCarTraffic()
         {
             for (int i = 0; i < _wayMatrix.Width; i++)
             {
@@ -94,13 +92,14 @@ namespace Assets.Scripts
             }
         }
 
-        private void StartBirdsSpawning()
+        public void EnableAggressiveBirds()
         {
-            for (int row = _birdsRows-1; row >= 0; row--) {
+            for (int row = _birdsRows - 1; row >= 0; row--)
+            {
 
                 for (int i = 0; i < _wayMatrix.Width; i++)
                 {
-                    StartCoroutine(SpawnBirds(i, row));
+                    StartCoroutine(AggressiveBirdSpawnRoutine(i, row));
                 }
             }
         }
@@ -109,9 +108,6 @@ namespace Assets.Scripts
 
         private E GetCreatedEntity<E>(IFactory<E> entityFactory) where E : Entity => entityFactory.GetCreated();
 
-        private void OnDisable()
-        {
-            StopAllCoroutines();
-        }
+        private void OnDisable() => StopAllCoroutines();
     }
 }

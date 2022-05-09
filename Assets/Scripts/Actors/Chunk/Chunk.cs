@@ -5,7 +5,7 @@ namespace Assets.Scripts
 {
     public class Chunk : Actor 
     {
-        private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
+        private List<Window> _windows = new List<Window>();
 
         public float Size { get; private set; }
         public Vector3 ConnectPosition => new Vector3(transform.position.x, transform.position.y, transform.position.z + Size);
@@ -13,15 +13,15 @@ namespace Assets.Scripts
         private void Awake()
         {
             Size = GetComponentInChildren<MeshRenderer>().bounds.size.z;
-            _spawnPoints.AddRange(GetComponentsInChildren<SpawnPoint>());
+            _windows.AddRange(GetComponentsInChildren<Window>());
         }
 
-        public void CollectWindows(Pool<NetGuy> netGuyPool, int density)
+        public void SettleWindows(Pool<NetGuy> netGuyPool, int density)
         {
-            foreach (SpawnPoint spawnPoint in _spawnPoints)
+            foreach (Window window in _windows)
             {
                 if (Random.Range(0, 100) > density) continue;
-                netGuyPool.Get(spawnPoint.transform.position);
+                netGuyPool.Get(window.transform.position);
             }
         }
     }
