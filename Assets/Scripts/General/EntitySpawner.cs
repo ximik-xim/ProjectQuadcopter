@@ -48,6 +48,26 @@ namespace Assets.Scripts
             _pools[typeof(NetGuy)] = new Pool<NetGuy>(new NetGuyFactory(_netGuyConfig, quadcopter), EntitiesContainer, 10);
         }
 
+        public void EnableCarTraffic()
+        {
+            for (int i = 0; i < _wayMatrix.Width; i++)
+            {
+                StartCoroutine(CarSpawnRoutine(i));
+            }
+        }
+
+        public void EnableAggressiveBirds()
+        {
+            for (int row = _birdsRows - 1; row >= 0; row--)
+            {
+
+                for (int i = 0; i < _wayMatrix.Width; i++)
+                {
+                    StartCoroutine(AggressiveBirdSpawnRoutine(i, row));
+                }
+            }
+        }
+
         IEnumerator CarSpawnRoutine(int line)
         {
             float horizon = 200f;
@@ -81,26 +101,6 @@ namespace Assets.Scripts
                 }
 
                 yield return new WaitForSeconds(Random.Range(0.15f * startSpeed / SpeedService.Speed, 0.5f * startSpeed / SpeedService.Speed));
-            }
-        }
-
-        public void EnableCarTraffic()
-        {
-            for (int i = 0; i < _wayMatrix.Width; i++)
-            {
-                StartCoroutine(CarSpawnRoutine(i));
-            }
-        }
-
-        public void EnableAggressiveBirds()
-        {
-            for (int row = _birdsRows - 1; row >= 0; row--)
-            {
-
-                for (int i = 0; i < _wayMatrix.Width; i++)
-                {
-                    StartCoroutine(AggressiveBirdSpawnRoutine(i, row));
-                }
             }
         }
 
