@@ -25,9 +25,6 @@ namespace Assets.Scripts
         [SerializeField][Range(0, 100)] private int _clothesLineDensity;
         [SerializeField][Range(0, 100)] private int _netGuyDensity;
 
-        [Header("BirdRows")]
-        [SerializeField][Range(1, 4)] private int _birdsRows;
-
         public int AggressiveBirdDensity => _aggressiveBirdDensity;
         public int CarDensity => _carDensity;
         public int ClotheslineDensity => _clothesLineDensity;
@@ -58,7 +55,7 @@ namespace Assets.Scripts
 
         public void EnableAggressiveBirds()
         {
-            for (int row = _birdsRows - 1; row >= 0; row--)
+            for (int row = 0; row < 3; row++)
             {
 
                 for (int i = 0; i < _wayMatrix.Width; i++)
@@ -68,7 +65,7 @@ namespace Assets.Scripts
             }
         }
 
-        IEnumerator CarSpawnRoutine(int line)
+        private IEnumerator CarSpawnRoutine(int line)
         {
             float horizon = 200f;
             float startSpeed = SpeedService.Speed;
