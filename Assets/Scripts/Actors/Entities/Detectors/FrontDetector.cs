@@ -1,18 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
 
-public class VisibilityRangeDetector : MonoBehaviour, IDetector
+public class FrontDetector : MonoBehaviour, IDetector
 {
     public event Action OnDetect;
 
-    private float _range;
+    private float _detectionDistance;
     private bool _isDetection = true;
     private void OnEnable() => UpdateService.OnUpdate += Detect;
 
-    public void SetRange(float range) => _range = range;
+    public void SetDetectionDistance(float range) => _detectionDistance = range;
     private void Detect()
     {
         if (IsTargetInRadius() && _isDetection)
@@ -27,26 +25,15 @@ public class VisibilityRangeDetector : MonoBehaviour, IDetector
     
     private bool IsTargetInRadius()
     {
-        if (Physics.Raycast(transform.position, new Vector3(0, 0, -1), _range))  
+        Ray ray = new Ray(transform.position, Vector3.back);
+        Debug.DrawRay(ray.origin, ray.direction * _detectionDistance, Color.red);
+
+        if (Physics.Raycast(ray.origin, ray.direction * _detectionDistance))  
             return true;
 
         return false;
     }
 
     private void OnDisable() => UpdateService.OnUpdate -= Detect;
-
-    private void OnDrawGizmos()
-    {
-        if (_isDetection)
-        {
-            Gizmos.color = Color.blue;
-        }
-        else
-        {
-            Gizmos.color = Color.red;
-        }
-
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, 0,  -_range));
-    }
 }
 

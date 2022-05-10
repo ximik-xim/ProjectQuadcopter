@@ -1,19 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
-using UnityEngine;
-
-public class CausingDamage : IReaction
+namespace Assets.Scripts
 {
-    private Health Health;
+    public class CausingDamage : IReaction
+    {
+        private Health _targetHealth;
 
-    public CausingDamage(Quadcopter quadcopter)
-    {
-        Health = quadcopter.gameObject.GetComponent<Health>();
-    }
-        
-    public void React()
-    {
-        Health.TakingDamage();
+        public CausingDamage(Health targetHealth) => _targetHealth = targetHealth;
+
+        public void React() => _targetHealth.TakeDamage();
     }
 }

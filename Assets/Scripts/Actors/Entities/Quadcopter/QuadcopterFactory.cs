@@ -4,25 +4,16 @@ namespace Assets.Scripts
 {
     class QuadcopterFactory : ActorFactory<Quadcopter, QuadcopterConfig>
     {
-        private WayMatrix _wayMatrix;
-
-        public QuadcopterFactory(QuadcopterConfig config, Container container, WayMatrix wayMatrix) : base(config, container)
-        {
-            _wayMatrix = wayMatrix;
-        }
-
+        public QuadcopterFactory(QuadcopterConfig config, Container container) : base(config, container) { }
 
         public override Quadcopter GetCreated()
         {
             Quadcopter quadcopter = Object.Instantiate(_config.Prefab, _container.transform);
             SwipeController swipeController = quadcopter.gameObject.AddComponent<SwipeController>();
             Health health = quadcopter.gameObject.AddComponent<Health>();
-            swipeController.SetMatrix(_wayMatrix);
-            swipeController.SetStartPosition(1, 1);
+            swipeController.SetStartPosition(MatrixPosition.Center);
             swipeController.SetMotionDuration(_config.MotionDuration);
-            quadcopter.transform.position = _wayMatrix.GetPosition(swipeController.CurrentPositionX, swipeController.CurrentPositionY);
             health.SetMaxHP(_config.HP);
-            
             return quadcopter;
         }
     }
