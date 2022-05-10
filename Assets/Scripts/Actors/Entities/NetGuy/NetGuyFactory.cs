@@ -15,10 +15,8 @@ namespace Assets.Scripts
             RadiusableDetector radiusDetector = netGuy.AddReaction<RadiusableDetector>(new LeanOutWindowReaction(windowLeanOuter,_config.SpeedDeparture));
             netGuy.gameObject.AddComponent<Mover>();
             netGuy.gameObject.AddComponent<Disappearer>().SetDisappearPoint(_target.transform.position + Vector3.back);
-            WindowLeanOuter windowLeanOuter = netGuy.gameObject.AddComponent<WindowLeanOuter>();
             netGuy.AddReaction<CollisionDetector>(new CausingDamage(_target.GetComponent<Health>()));
-            RadiusableDetector radiusDetector = netGuy.AddReaction<RadiusableDetector>(new LeanOutWindowReaction(windowLeanOuter));
-            radiusDetector.SetRadius(_config.DetectionRange);
+            radiusDetector.SetRadius(_config.RangeDetector);
             radiusDetector.SetTarget(_target);
             return netGuy;
         }
