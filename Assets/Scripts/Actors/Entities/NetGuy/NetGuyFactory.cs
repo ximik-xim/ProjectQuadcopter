@@ -12,13 +12,21 @@ namespace Assets.Scripts
         {
             NetGuy netGuy = Object.Instantiate(_config.Prefab);
             WindowLeanOuter windowLeanOuter = netGuy.gameObject.AddComponent<WindowLeanOuter>();
-            RadiusableDetector radiusDetector = netGuy.AddReaction<RadiusableDetector>(new LeanOutWindowReaction(windowLeanOuter,_config.SpeedDeparture));
             netGuy.gameObject.AddComponent<Mover>();
             netGuy.gameObject.AddComponent<Disappearer>().SetDisappearPoint(_target.transform.position + Vector3.back);
-            netGuy.AddReaction<CollisionDetector>(new CausingDamage(_target.GetComponent<Health>()));
-            radiusDetector.SetRadius(_config.RangeDetector);
-            radiusDetector.SetTarget(_target);
+            
+            SpecialReactionDataBase specialCollision = new SpecialReactionDataBase();
+            netGuy.AddDetector<CollisionDetector>(specialCollision);
+            specialCollision.AddReaction<Quadcopter>(new CausingDamage(_target.GetComponent<Health>()));
+
+            // SpecialReaction specialRadiusable = new GeneralReaction();
+            // RadiusableDetector radiusDetector = netGuy.AddDetector<RadiusableDetector>(specialRadiusable);
+            // specialRadiusable.AddReaction<Quadcopter>(new LeanOutWindowReaction(windowLeanOuter,_config.SpeedDeparture));
+
+            // radiusDetector.SetRadius(_config.RangeDetector);
+            // radiusDetector.SetTarget(_target);
             return netGuy;
         }
     }
 }
+ 
